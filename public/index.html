@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mazhalai Preschool | Early Child Education — Pollachi</title>
+    <meta name="description" content="Mazhalai Preschool — Nurturing young minds through play-based early childhood education in Pollachi. Enroll today!">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+    ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo.png" alt="Mazhalai Preschool Logo" class="logo-img">
+                <div class="logo-text-group">
+                    <span class="logo-name">Mazhalai</span>
+                    <span class="logo-sub">Early Child Education</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#gallery">Our Gallery</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="admin/index.html" target="_blank" class="btn btn-admin-nav" title="Admin Portal Login">
+                    <span>🔒</span> Admin
+                </a>
+                <a href="#contact" class="btn btn-primary nav-cta">Contact Us</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <header id="home" class="hero section">
+        <!-- Decorative blobs -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="container hero-container">
+            <div class="hero-content reveal">
+                <div class="pill-badge">🌟 Early Child Education &amp; Teacher Training</div>
+                <h1 class="hero-title">
+                    Where Little Minds<br>
+                    <span class="hero-highlight">Blossom &amp; Grow</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Providing a nurturing, safe, and joyful environment for your child's first steps into the magical world of learning.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#admissions" class="btn btn-primary btn-large">
+                        <span>✏️</span> Enroll Now
+                    </a>
+                    <a href="#about" class="btn btn-outline btn-large">
+                        <span>📖</span> Learn More
+                    </a>
+                </div>
+                <!-- Stats row -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <strong>3+</strong>
+                        <span>Programs</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <strong>100%</strong>
+                        <span>Safe &amp; Secure</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <strong>Expert</strong>
+                        <span>Teachers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper reveal reveal-delay">
+                <div class="hero-img-frame">
+                    <img src="assets/school-hero.png" alt="Mazhalai Preschool Building" class="hero-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Separator -->
+        <div class="wave-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         ABOUT SECTION
+    ============================================================ -->
+    <section id="about" class="about section">
+        <div class="container">
+            <!-- Section heading -->
+            <div class="about-header text-center reveal">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title">Nurturing the <span class="highlight">Future</span></h2>
+                <p class="about-lead">At Mazhalai Preschool, we believe early childhood education is the foundation of a lifetime of learning — blending structured lessons with the joy of free play.</p>
+            </div>
+
+            <!-- Full-width image with overlay chips -->
+            <div class="about-hero-img-wrap reveal">
+                <img src="assets/classroom-about.png" alt="Children learning at Mazhalai Preschool" class="about-hero-img">
+                <div class="about-overlay-chips">
+                    <span class="chip chip-black">🎨 Play-Based Learning</span>
+                    <span class="chip chip-yellow">📚 Expert Teachers</span>
+                    <span class="chip chip-black">🌟 Holistic Growth</span>
+                </div>
+            </div>
+
+            <!-- Feature pills row -->
+            <div class="about-pills-row reveal">
+                <div class="about-pill">
+                    <div class="pill-icon">🌱</div>
+                    <div>
+                        <strong>Play-Based Learning</strong>
+                        <p>Children learn best through play — we make every lesson an adventure.</p>
+                    </div>
+                </div>
+                <div class="about-pill">
+                    <div class="pill-icon">🛡️</div>
+                    <div>
+                        <strong>Safe &amp; Secure</strong>
+                        <p>A monitored, hygienic, and fully secure campus your child will love.</p>
+                    </div>
+                </div>
+                <div class="about-pill">
+                    <div class="pill-icon">👩‍🏫</div>
+                    <div>
+                        <strong>Caring Educators</strong>
+                        <p>Trained, passionate teachers who treat every child like family.</p>
+                    </div>
+                </div>
+                <div class="about-pill">
+                    <div class="pill-icon">💛</div>
+                    <div>
+                        <strong>Holistic Development</strong>
+                        <p>Mind, body, and soul — we nurture the whole child, every day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PROGRAMS SECTION
+    ============================================================ -->
+    <section id="programs" class="programs section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">What We Offer</div>
+                <h2 class="section-title">Our <span class="highlight">Programs</span></h2>
+                <p>Tailored learning experiences for every stage of your child's early development.</p>
+            </div>
+
+            <div class="programs-grid">
+                <!-- Card 1 -->
+                <div class="program-card reveal">
+                    <div class="card-icon-wrap yellow-wrap">🌱</div>
+                    <div class="card-header bg-yellow">
+                        <h3>Play Group</h3>
+                        <span class="age-tag">1.5 – 2.5 Years</span>
+                    </div>
+                    <div class="card-body">
+                        <p>A gentle, loving introduction to learning through guided play, sensory exploration, and joyful social interaction.</p>
+                        <div class="card-tags">
+                            <span class="tag">Sensory Play</span>
+                            <span class="tag">Social Skills</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="program-card reveal" style="animation-delay:0.1s">
+                    <div class="card-icon-wrap black-wrap">🚀</div>
+                    <div class="card-header bg-black">
+                        <h3 class="text-white">Pre-KG</h3>
+                        <span class="age-tag text-yellow">2.5 – 3.5 Years</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Focusing on language development, motor skills, and early cognitive concepts in a stimulating environment.</p>
+                        <div class="card-tags">
+                            <span class="tag">Language</span>
+                            <span class="tag">Motor Skills</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="program-card reveal" style="animation-delay:0.2s">
+                    <div class="card-icon-wrap yellow-wrap">🎓</div>
+                    <div class="card-header bg-yellow">
+                        <h3>LKG / UKG</h3>
+                        <span class="age-tag">3.5 – 5.5 Years</span>
+                    </div>
+                    <div class="card-body">
+                        <p>A comprehensive school readiness program emphasizing reading, writing, numeracy, and critical thinking skills.</p>
+                        <div class="card-tags">
+                            <span class="tag">Reading</span>
+                            <span class="tag">Writing</span>
+                            <span class="tag">Math</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         WHY CHOOSE US (NEW SECTION)
+    ============================================================ -->
+    <section class="why-us section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">Our Strengths</div>
+                <h2 class="section-title">Why Choose <span class="highlight">Mazhalai?</span></h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon">🧠</div>
+                    <h4>Expert Curriculum</h4>
+                    <p>Designed by child development specialists blending global best practices with Indian values.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🛡️</div>
+                    <h4>100% Safe Campus</h4>
+                    <p>CCTV-monitored campus, qualified staff, hygienic facilities to ensure child safety at all times.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🌈</div>
+                    <h4>Holistic Growth</h4>
+                    <p>We nurture creativity, emotions, and intellect equally — raising well-rounded, happy children.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">👩‍🏫</div>
+                    <h4>Trained Educators</h4>
+                    <p>Our teachers are trained in early childhood psychology and provide a warm, patient environment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         OUR GALLERY SECTION (PAST EVENTS)
+    ============================================================ -->
+    <section id="gallery" class="gallery section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">Cherished Memories</div>
+                <h2 class="section-title">Our <span class="highlight">Gallery</span></h2>
+                <p>Glimpses of unforgettable celebrations, sports days, creative workshops, and joyful everyday learning at Mazhalai Preschool.</p>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="gallery-filters reveal">
+                <button class="gallery-filter-btn active" data-filter="all">🌟 All Events</button>
+                <button class="gallery-filter-btn" data-filter="annual-day">🎭 Annual Day</button>
+                <button class="gallery-filter-btn" data-filter="sports-day">🏆 Sports Day</button>
+                <button class="gallery-filter-btn" data-filter="art-craft">🎨 Art &amp; Craft</button>
+                <button class="gallery-filter-btn" data-filter="cultural">🪔 Cultural Fests</button>
+                <button class="gallery-filter-btn" data-filter="learning">🚀 Learning &amp; Play</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Card 1: Annual Day -->
+                <div class="gallery-card reveal" data-category="annual-day">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/annual-day.png" alt="Annual Day Celebration" loading="lazy">
+                        <div class="gallery-badge">Annual Day</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Grand Annual Stage Celebration</h3>
+                                <p>Children shining bright in colorful performance costumes on stage.</p>
+                                <span class="gallery-date">📅 March 2026</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Sports Day -->
+                <div class="gallery-card reveal" data-category="sports-day" style="animation-delay:0.1s">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/sports-day.png" alt="Annual Sports Day Race" loading="lazy">
+                        <div class="gallery-badge">Sports Day</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Fun &amp; Fitness Sports Meet</h3>
+                                <p>Toddlers participating in cheerful races with colorful balloons &amp; ribbons.</p>
+                                <span class="gallery-date">📅 January 2026</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Art & Craft -->
+                <div class="gallery-card reveal" data-category="art-craft" style="animation-delay:0.2s">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/art-craft.png" alt="Finger Painting Workshop" loading="lazy">
+                        <div class="gallery-badge">Art &amp; Craft</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Creative Finger Painting &amp; Art</h3>
+                                <p>Hands-on sensory art sessions unleashing young imaginations.</p>
+                                <span class="gallery-date">📅 February 2026</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Cultural Fest -->
+                <div class="gallery-card reveal" data-category="cultural" style="animation-delay:0.1s">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/cultural-fest.png" alt="Cultural Festival Celebration" loading="lazy">
+                        <div class="gallery-badge">Cultural Fest</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Traditional Cultural Celebration</h3>
+                                <p>Little stars dressed in festive ethnic attire celebrating Indian culture.</p>
+                                <span class="gallery-date">📅 Pongal / Diwali Fest</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Learning & Play -->
+                <div class="gallery-card reveal" data-category="learning" style="animation-delay:0.2s">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/science-play.png" alt="Sensory Science Discovery" loading="lazy">
+                        <div class="gallery-badge">Learning &amp; Play</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Sensory Science &amp; Discovery</h3>
+                                <p>Curious young minds discovering nature and science through fun experiments.</p>
+                                <span class="gallery-date">📅 Science Week</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Classroom Activity -->
+                <div class="gallery-card reveal" data-category="learning" style="animation-delay:0.3s">
+                    <div class="gallery-img-wrap">
+                        <img src="assets/classroom-about.png" alt="Interactive Classroom Learning" loading="lazy">
+                        <div class="gallery-badge">Learning &amp; Play</div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Interactive Group Learning</h3>
+                                <p>Joyful everyday classroom activities guided by loving teachers.</p>
+                                <span class="gallery-date">📅 Everyday Activity</span>
+                            </div>
+                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#10094;</button>
+            <div class="lightbox-figure">
+                <img src="" alt="" id="lightboxImg">
+                <div class="lightbox-caption">
+                    <span class="lightbox-badge" id="lightboxBadge">Category</span>
+                    <h3 id="lightboxTitle">Event Title</h3>
+                    <p id="lightboxDesc">Event Description</p>
+                    <span class="lightbox-date" id="lightboxDate">Date</span>
+                </div>
+            </div>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         ADMISSIONS / CTA
+    ============================================================ -->
+    <section id="admissions" class="cta section text-center">
+        <div class="cta-inner">
+            <!-- Decorative doodles -->
+            <div class="cta-doodle cta-doodle-1">🌟</div>
+            <div class="cta-doodle cta-doodle-2">🎈</div>
+            <div class="cta-doodle cta-doodle-3">📚</div>
+            <div class="container">
+                <div class="section-label white-label">Admissions Open</div>
+                <h2 class="cta-title">Ready to Join Our Family?</h2>
+                <p class="cta-desc">Admissions are now open for the upcoming academic year. Give your child the best start in life by securing their spot at Mazhalai Preschool today!</p>
+                <a href="#contact" class="btn btn-black btn-large">Apply for Admission →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT & LEADERSHIP DIRECT CONNECT SECTION
+    ============================================================ -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">Direct Leadership Access</div>
+                <h2 class="section-title">Get in Touch with Our <span class="highlight">Leadership</span></h2>
+                <p>Have questions about admissions, early child development, or campus visits? Connect directly with our core leadership team.</p>
+            </div>
+
+            <!-- Leadership Contact Cards Grid -->
+            <div class="leadership-grid">
+                <!-- Card 1: Chairman -->
+                <div class="leadership-card reveal">
+                    <div class="lc-badge">👑 Leadership</div>
+                    <div class="lc-icon-wrap">👑</div>
+                    <h3>Chairman</h3>
+                    <p class="lc-role">Educational Vision &amp; Governance</p>
+                    <div class="lc-divider"></div>
+                    <a href="tel:+919842212345" class="btn btn-primary lc-btn">
+                        <span>📞</span> Call Chairman
+                    </a>
+                    <span class="lc-phone-display">+91 98422 12345</span>
+                </div>
+
+                <!-- Card 2: Director -->
+                <div class="leadership-card featured reveal" style="animation-delay:0.1s">
+                    <div class="lc-badge featured-badge">🎓 Academic Lead</div>
+                    <div class="lc-icon-wrap">🎓</div>
+                    <h3>Director</h3>
+                    <p class="lc-role">Curriculum &amp; Child Development</p>
+                    <div class="lc-divider"></div>
+                    <a href="tel:+919842267890" class="btn btn-primary lc-btn">
+                        <span>📞</span> Call Director
+                    </a>
+                    <span class="lc-phone-display">+91 98422 67890</span>
+                </div>
+
+                <!-- Card 3: Owner -->
+                <div class="leadership-card reveal" style="animation-delay:0.2s">
+                    <div class="lc-badge">📱 Administration</div>
+                    <div class="lc-icon-wrap">📱</div>
+                    <h3>Owner &amp; Founder</h3>
+                    <p class="lc-role">Student Safety &amp; Daily Operations</p>
+                    <div class="lc-divider"></div>
+                    <a href="tel:+919500446103" class="btn btn-primary lc-btn">
+                        <span>📞</span> Call Owner
+                    </a>
+                    <span class="lc-phone-display">+91 95004 46103</span>
+                </div>
+            </div>
+
+            <!-- Campus Location & Visiting Details Box -->
+            <div class="campus-info-card reveal">
+                <div class="cic-item">
+                    <div class="cic-icon">📍</div>
+                    <div>
+                        <h4>Visit Our Campus</h4>
+                        <p><a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">29, Om Shanthinagar, Opposite to Lathangi School, T.Kottampatty, Pollachi - 642 002 📍</a></p>
+                    </div>
+                </div>
+                <div class="cic-divider"></div>
+                <div class="cic-item">
+                    <div class="cic-icon">✉️</div>
+                    <div>
+                        <h4>Email &amp; Campus Hours</h4>
+                        <p><a href="mailto:info@mazhalaidaycare.com">info@mazhalaidaycare.com</a></p>
+                        <span class="cic-hours">Mon – Sat: 8:30 AM – 5:30 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Mazhalai Preschool" class="footer-logo-img">
+                    <div>
+                        <span class="footer-name">Mazhalai <span class="highlight-yellow">Preschool</span></span>
+                        <p class="footer-tagline">A Unit of Sunflower Educational Charitable Trust</p>
+                    </div>
+                </div>
+                <p>Nurturing little minds with love, creativity, and expert guidance since 2026. Join us in shaping a brighter future.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#gallery">Our Gallery</a></li>
+                    <li><a href="#admissions">Admissions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <p style="color:#9CA3AF; font-size:0.9rem; margin-bottom:15px;">Stay connected for updates and activities!</p>
+                <div class="social-icons">
+                    <a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1" target="_blank" rel="noopener noreferrer" aria-label="Google Info" title="Google Business Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 9.61 16 7 16A8 8 0 1 1 7 0c2.19 0 4.036.8 5.443 2.125l-2.008 2.008C9.52 3.27 8.396 2.8 7 2.8a5.2 5.2 0 1 0 0 10.4c2.81 0 4.182-1.78 4.387-2.736H7V7.741h8.545z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/mazhali_pollachi?utm_source=qr&amp;igsh=cGRneXUxZndscXNz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Follow on Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook" title="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>© 2026 Mazhalai Daycare &amp; Teacher Training. All rights reserved. | Made with ❤️ in Pollachi</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section, header');
+        const navLinkItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinkItems.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
