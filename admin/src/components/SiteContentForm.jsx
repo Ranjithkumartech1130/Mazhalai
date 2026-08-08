@@ -3,13 +3,13 @@ import { supabase } from '../supabase'
 
 export default function SiteContentForm() {
   const [formData, setFormData] = useState({
-    hero_title: '',
-    hero_subtitle: '',
-    about_text: '',
-    phone: '',
-    email: '',
-    address: ''
-  })
+  hero_title: '',
+  hero_subtitle: '',
+  phone: '',
+  email: '',
+  address: '',
+  hero_image_url: ''
+})
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')

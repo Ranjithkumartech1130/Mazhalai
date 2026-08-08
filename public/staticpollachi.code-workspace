@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../pollachi login page"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "staticpollachi"
+	}
+}

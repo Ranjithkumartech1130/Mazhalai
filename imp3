@@ -1,0 +1,69 @@
+# Connect Website to Admin Login & Panel
+
+The public website's **Admin** button and the [public/admin/index.html](file:///c:/Users/KiTE/Downloads/staticpollachi/public/admin/index.html) redirect page both link to `http://localhost:5173` — the Vite dev server. This works only when the dev server is running, and breaks when the site is opened as a static file or deployed. 
+
+The fix is to **build** the React admin app into `public/admin-app/` (a subfolder of the website) so it can be accessed with a simple relative link.
+
+## Proposed Changes
+
+### 1. Admin App — Vite Build Config
+
+#### [MODIFY] [vite.config.js](file:///c:/Users/KiTE/Downloads/staticpollachi/admin/vite.config.js)
+Set `build.outDir` to `../public/admin-app` so `npm run build` drops the compiled files directly inside the public website folder.
+
+```diff
+ export default defineConfig({
+   plugins: [react(), tailwindcss()],
+   base: './',
++  build: {
++    outDir: '../public/admin-app',
++    emptyOutDir: true,
++  },
+ })
+```
+
+---
+
+### 2. Public Website — Admin Nav Link
+
+#### [MODIFY] [index.html](file:///c:/Users/KiTE/Downloads/staticpollachi/public/index.html)
+Change the **Admin** button in the navbar from the hardcoded localhost URL to the built app's relative path:
+
+```diff
+-<a href="http://localhost:5173" target="_blank" class="btn btn-admin-nav" id="admin-portal-link" ...>
++<a href="admin-app/index.html" class="btn btn-admin-nav" id="admin-portal-link" ...>
+```
+
+---
+
+### 3. Public Website — Admin Redirect Page
+
+#### [MODIFY] [admin/index.html](file:///c:/Users/KiTE/Downloads/staticpollachi/public/admin/index.html)
+Update the meta-refresh and manual link to point to the built app instead of localhost:
+
+```diff
+-<meta http-equiv="refresh" content="0; url=http://localhost:5173" />
++<meta http-equiv="refresh" content="0; url=../admin-app/index.html" />
+ ...
+-<a href="http://localhost:5173">Open Admin Panel →</a>
++<a href="../admin-app/index.html">Open Admin Panel →</a>
+```
+
+---
+
+### 4. Run the Build
+
+After the config change, run `npm run build` inside the `admin/` folder to produce `public/admin-app/`.
+
+---
+
+### 5. Admin "Back to Website" Link
+
+The Login page already has `href="../index.html"` which will correctly navigate back to the public site once the admin is served from `public/admin-app/`.
+
+## Verification Plan
+
+### Manual Verification
+1. Open [public/index.html](file:///c:/Users/KiTE/Downloads/staticpollachi/public/index.html) in a browser — click the **🔒 Admin** button; it should open the React login page (no localhost needed).
+2. On the login page, click **Back to Website** — should return to the main site.
+3. Navigate to [public/admin/index.html](file:///c:/Users/KiTE/Downloads/staticpollachi/public/admin/index.html) — should auto-redirect to the React login within 1 second.

@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Sour+Gummy:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -30,12 +30,13 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About Us</a></li>
+                <li><a href="#vision-mission">Vision & Mission</a></li>
                 <li><a href="#programs">Programs</a></li>
                 <li><a href="#gallery">Our Gallery</a></li>
                 <li><a href="#admissions">Admissions</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="admin/index.html" target="_blank" class="btn btn-admin-nav" title="Admin Portal Login">
+                <a href="admin-app/index.html" class="btn btn-admin-nav" id="admin-portal-link" title="Admin Portal Login">
                     <span>🔒</span> Admin
                 </a>
                 <a href="#contact" class="btn btn-primary nav-cta">Contact Us</a>
@@ -61,13 +62,13 @@
         <div class="container hero-container">
             <div class="hero-content reveal">
                 <div class="pill-badge">🌟 Early Child Education &amp; Teacher Training</div>
-                <h1 class="hero-title">
-                    Where Little Minds<br>
-                    <span class="hero-highlight">Blossom &amp; Grow</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Providing a nurturing, safe, and joyful environment for your child's first steps into the magical world of learning.
-                </p>
+                <h1 class="hero-title" id="hero-title">
+    Where Little Minds<br>
+    <span class="hero-highlight">Blossom &amp; Grow</span>
+</h1>
+                <p class="hero-subtitle" id="hero-subtitle">
+    Providing a nurturing, safe, and joyful environment for your child's first steps into the magical world of learning.
+</p>
                 <div class="hero-buttons">
                     <a href="#admissions" class="btn btn-primary btn-large">
                         <span>✏️</span> Enroll Now
@@ -97,7 +98,7 @@
 
             <div class="hero-image-wrapper reveal reveal-delay">
                 <div class="hero-img-frame">
-                    <img src="assets/school-hero.png" alt="Mazhalai Preschool Building" class="hero-img">
+                    <img src="assets/school-hero.jpg" alt="Mazhalai Preschool Building" class="hero-img">
                 </div>
             </div>
         </div>
@@ -167,6 +168,98 @@
     </section>
 
     <!-- ============================================================
+         VISION & MISSION SECTION
+    ============================================================ -->
+    <section id="vision-mission" class="vm-section section">
+        <!-- Decorative background shapes -->
+        <div class="vm-bg-shape vm-shape-1"></div>
+        <div class="vm-bg-shape vm-shape-2"></div>
+
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">Our Purpose</div>
+                <h2 class="section-title">Vision &amp; Mission</h2>
+                <p>The guiding principles that inspire everything we do at Mazhalai Preschool.</p>
+            </div>
+
+            <div class="vm-grid">
+                <!-- Vision Card -->
+                <div class="vm-card vm-vision reveal">
+                    <div class="vm-card-glow"></div>
+                    <div class="vm-icon-ring">
+                        <span class="vm-main-icon">🌅</span>
+                    </div>
+                    <div class="vm-quote-mark">&ldquo;</div>
+                    <div class="vm-label-tag">Our Vision</div>
+                    <h3 class="vm-card-title">Shaping Tomorrow's<br>Leaders Today</h3>
+                    <p class="vm-card-text">
+                        To be the most trusted early childhood institution in Pollachi — where every child discovers their unique potential, develops a lifelong love for learning, and grows into a confident, compassionate, and creative individual ready to inspire the world.
+                    </p>
+                    <div class="vm-pillars">
+                        <span class="vm-pillar"><span>🌟</span> Excellence</span>
+                        <span class="vm-pillar"><span>🤲</span> Compassion</span>
+                        <span class="vm-pillar"><span>💡</span> Innovation</span>
+                    </div>
+                </div>
+
+                <!-- Decorative Divider -->
+                <div class="vm-divider reveal">
+                    <div class="vm-divider-line"></div>
+                    <div class="vm-divider-emblem">✦</div>
+                    <div class="vm-divider-line"></div>
+                </div>
+
+                <!-- Mission Card -->
+                <div class="vm-card vm-mission reveal">
+                    <div class="vm-card-glow vm-glow-dark"></div>
+                    <div class="vm-icon-ring vm-icon-dark">
+                        <span class="vm-main-icon">🎯</span>
+                    </div>
+                    <div class="vm-quote-mark vm-quote-dark">&ldquo;</div>
+                    <div class="vm-label-tag vm-tag-dark">Our Mission</div>
+                    <h3 class="vm-card-title">Nurturing Every Child<br>With Heart &amp; Purpose</h3>
+                    <p class="vm-card-text">
+                        To provide a safe, joyful, and stimulating environment where children from 1.5 to 5.5 years thrive through play-based learning, expert guidance, and holistic development — empowering families with an education that blends the best of modern pedagogy with timeless Indian values.
+                    </p>
+                    <div class="vm-pillars">
+                        <span class="vm-pillar vm-pillar-dark"><span>🛡️</span> Safety</span>
+                        <span class="vm-pillar vm-pillar-dark"><span>🌱</span> Growth</span>
+                        <span class="vm-pillar vm-pillar-dark"><span>❤️</span> Care</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Values Strip -->
+            <div class="vm-values-strip reveal">
+                <div class="vm-value-item">
+                    <span class="vm-value-icon">🏆</span>
+                    <span class="vm-value-label">Child-Centered</span>
+                </div>
+                <div class="vm-value-sep">·</div>
+                <div class="vm-value-item">
+                    <span class="vm-value-icon">🌈</span>
+                    <span class="vm-value-label">Inclusive Learning</span>
+                </div>
+                <div class="vm-value-sep">·</div>
+                <div class="vm-value-item">
+                    <span class="vm-value-icon">👨‍👩‍👧</span>
+                    <span class="vm-value-label">Family Partnership</span>
+                </div>
+                <div class="vm-value-sep">·</div>
+                <div class="vm-value-item">
+                    <span class="vm-value-icon">🧩</span>
+                    <span class="vm-value-label">Holistic Growth</span>
+                </div>
+                <div class="vm-value-sep">·</div>
+                <div class="vm-value-item">
+                    <span class="vm-value-icon">🌍</span>
+                    <span class="vm-value-label">Global Values</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
          PROGRAMS SECTION
     ============================================================ -->
     <section id="programs" class="programs section bg-light">
@@ -177,7 +270,7 @@
                 <p>Tailored learning experiences for every stage of your child's early development.</p>
             </div>
 
-            <div class="programs-grid">
+            <div class="programs-grid" id="programsGrid">
                 <!-- Card 1 -->
                 <div class="program-card reveal">
                     <div class="card-icon-wrap yellow-wrap">🌱</div>
@@ -285,103 +378,9 @@
                 <button class="gallery-filter-btn" data-filter="learning">🚀 Learning &amp; Play</button>
             </div>
 
-            <!-- Gallery Grid -->
+            <!-- Gallery Grid — populated by supabaseClient.js (static fallback if DB is empty) -->
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Card 1: Annual Day -->
-                <div class="gallery-card reveal" data-category="annual-day">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/annual-day.png" alt="Annual Day Celebration" loading="lazy">
-                        <div class="gallery-badge">Annual Day</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Grand Annual Stage Celebration</h3>
-                                <p>Children shining bright in colorful performance costumes on stage.</p>
-                                <span class="gallery-date">📅 March 2026</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2: Sports Day -->
-                <div class="gallery-card reveal" data-category="sports-day" style="animation-delay:0.1s">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/sports-day.png" alt="Annual Sports Day Race" loading="lazy">
-                        <div class="gallery-badge">Sports Day</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Fun &amp; Fitness Sports Meet</h3>
-                                <p>Toddlers participating in cheerful races with colorful balloons &amp; ribbons.</p>
-                                <span class="gallery-date">📅 January 2026</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Art & Craft -->
-                <div class="gallery-card reveal" data-category="art-craft" style="animation-delay:0.2s">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/art-craft.png" alt="Finger Painting Workshop" loading="lazy">
-                        <div class="gallery-badge">Art &amp; Craft</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Creative Finger Painting &amp; Art</h3>
-                                <p>Hands-on sensory art sessions unleashing young imaginations.</p>
-                                <span class="gallery-date">📅 February 2026</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4: Cultural Fest -->
-                <div class="gallery-card reveal" data-category="cultural" style="animation-delay:0.1s">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/cultural-fest.png" alt="Cultural Festival Celebration" loading="lazy">
-                        <div class="gallery-badge">Cultural Fest</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Traditional Cultural Celebration</h3>
-                                <p>Little stars dressed in festive ethnic attire celebrating Indian culture.</p>
-                                <span class="gallery-date">📅 Pongal / Diwali Fest</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5: Learning & Play -->
-                <div class="gallery-card reveal" data-category="learning" style="animation-delay:0.2s">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/science-play.png" alt="Sensory Science Discovery" loading="lazy">
-                        <div class="gallery-badge">Learning &amp; Play</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Sensory Science &amp; Discovery</h3>
-                                <p>Curious young minds discovering nature and science through fun experiments.</p>
-                                <span class="gallery-date">📅 Science Week</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6: Classroom Activity -->
-                <div class="gallery-card reveal" data-category="learning" style="animation-delay:0.3s">
-                    <div class="gallery-img-wrap">
-                        <img src="assets/classroom-about.png" alt="Interactive Classroom Learning" loading="lazy">
-                        <div class="gallery-badge">Learning &amp; Play</div>
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h3>Interactive Group Learning</h3>
-                                <p>Joyful everyday classroom activities guided by loving teachers.</p>
-                                <span class="gallery-date">📅 Everyday Activity</span>
-                            </div>
-                            <button class="gallery-zoom-btn" aria-label="View photo">🔍</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- JS will inject cards from Supabase or fall back to static cards -->
             </div>
         </div>
     </section>
@@ -404,6 +403,22 @@
             <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&#10095;</button>
         </div>
     </div>
+
+    <!-- ============================================================
+         EVENTS SECTION (dynamically populated from Supabase)
+    ============================================================ -->
+    <section id="events" class="events-section section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">What's Happening</div>
+                <h2 class="section-title">Upcoming &amp; Recent <span class="highlight">Events</span></h2>
+                <p>Celebrations, sports meets, cultural fests and more — stay connected with school life.</p>
+            </div>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Populated by supabaseClient.js -->
+            </div>
+        </div>
+    </section>
 
     <!-- ============================================================
          ADMISSIONS / CTA
@@ -518,6 +533,7 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#vision-mission">Vision & Mission</a></li>
                     <li><a href="#programs">Programs</a></li>
                     <li><a href="#gallery">Our Gallery</a></li>
                     <li><a href="#admissions">Admissions</a></li>
@@ -553,6 +569,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/supabaseClient.js"></script>
+    <!-- supabaseClient.js initialises gallery filters + fetches all DB data on DOMContentLoaded -->
     <script>
         // Scroll reveal animation
         const reveals = document.querySelectorAll('.reveal');
