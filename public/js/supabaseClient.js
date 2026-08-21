@@ -63,6 +63,11 @@ async function fetchSiteContent() {
       const heroImg = document.getElementById('hero-image');
       if (heroImg) heroImg.src = data.hero_image_url;
     }
+
+    if (data.about_image_url) {
+      const aboutImg = document.getElementById('about-image');
+      if (aboutImg) aboutImg.src = data.about_image_url;
+    }
   } catch (err) {
     console.error('Unexpected error fetching site content:', err);
   }
@@ -102,7 +107,7 @@ function buildGalleryCard(item) {
   const dateLabel = rawDate ? `📅 ${formatDate(rawDate)}` : '';
 
   return `
-    <div class="gallery-card reveal active" data-category="${catSlug}">
+    <div class="gallery-card reveal" data-category="${catSlug}">
       <div class="gallery-img-wrap">
         <img
           src="${item.image_url}"
@@ -169,12 +174,30 @@ async function fetchGallery() {
 // ──────────────────────────────────────────────────────────────
 function applyGalleryFilter(filterValue) {
   const cards = document.querySelectorAll('.gallery-card');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canAnimate = typeof gsap !== 'undefined' && !reduceMotion;
+
   cards.forEach(card => {
     const cat = card.getAttribute('data-category');
-    if (filterValue === 'all' || cat === filterValue) {
+    const shouldShow = filterValue === 'all' || cat === filterValue;
+    const isHidden = card.classList.contains('hide');
+
+    if (shouldShow && isHidden) {
       card.classList.remove('hide');
-    } else {
-      card.classList.add('hide');
+      if (canAnimate) {
+        gsap.fromTo(card,
+          { opacity: 0, scale: 0.9, y: 14 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'back.out(1.6)' });
+      }
+    } else if (!shouldShow && !isHidden) {
+      if (canAnimate) {
+        gsap.to(card, {
+          opacity: 0, scale: 0.9, duration: 0.2, ease: 'power1.in',
+          onComplete: () => card.classList.add('hide'),
+        });
+      } else {
+        card.classList.add('hide');
+      }
     }
   });
 }
@@ -187,6 +210,9 @@ function initGalleryFilters() {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(btn, { scale: 0.92 }, { scale: 1, duration: 0.3, ease: 'back.out(3)' });
+      }
       applyGalleryFilter(btn.getAttribute('data-filter'));
     });
   });
@@ -285,7 +311,7 @@ async function fetchPrograms() {
         const tagsHtml = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
         
         programsGrid.insertAdjacentHTML('beforeend', `
-          <div class="program-card reveal active" style="animation-delay: ${index * 0.1}s">
+          <div class="program-card reveal reveal-pop">
             <div class="card-icon-wrap ${themeWrap}">${prog.icon || '🌱'}</div>
             <div class="card-header ${bgColor}">
               <h3 class="${textColor}">${prog.title}</h3>
@@ -309,7 +335,7 @@ async function fetchPrograms() {
 // ──────────────────────────────────────────────────────────────
 function getStaticGalleryHTML() {
   return `
-    <div class="gallery-card reveal active" data-category="annual-day">
+    <div class="gallery-card reveal" data-category="annual-day">
       <div class="gallery-img-wrap">
         <img src="assets/annual-day.png" alt="Annual Day Celebration" loading="lazy">
         <div class="gallery-badge">Annual Day</div>
@@ -323,7 +349,7 @@ function getStaticGalleryHTML() {
         </div>
       </div>
     </div>
-    <div class="gallery-card reveal active" data-category="sports-day">
+    <div class="gallery-card reveal" data-category="sports-day">
       <div class="gallery-img-wrap">
         <img src="assets/sports-day.png" alt="Annual Sports Day Race" loading="lazy">
         <div class="gallery-badge">Sports Day</div>
@@ -337,7 +363,7 @@ function getStaticGalleryHTML() {
         </div>
       </div>
     </div>
-    <div class="gallery-card reveal active" data-category="art-craft">
+    <div class="gallery-card reveal" data-category="art-craft">
       <div class="gallery-img-wrap">
         <img src="assets/art-craft.png" alt="Finger Painting Workshop" loading="lazy">
         <div class="gallery-badge">Art &amp; Craft</div>
@@ -351,7 +377,7 @@ function getStaticGalleryHTML() {
         </div>
       </div>
     </div>
-    <div class="gallery-card reveal active" data-category="cultural">
+    <div class="gallery-card reveal" data-category="cultural">
       <div class="gallery-img-wrap">
         <img src="assets/cultural-fest.png" alt="Cultural Festival Celebration" loading="lazy">
         <div class="gallery-badge">Cultural Fest</div>
@@ -365,7 +391,7 @@ function getStaticGalleryHTML() {
         </div>
       </div>
     </div>
-    <div class="gallery-card reveal active" data-category="learning">
+    <div class="gallery-card reveal" data-category="learning">
       <div class="gallery-img-wrap">
         <img src="assets/science-play.png" alt="Sensory Science Discovery" loading="lazy">
         <div class="gallery-badge">Learning &amp; Play</div>
@@ -379,7 +405,7 @@ function getStaticGalleryHTML() {
         </div>
       </div>
     </div>
-    <div class="gallery-card reveal active" data-category="learning">
+    <div class="gallery-card reveal" data-category="learning">
       <div class="gallery-img-wrap">
         <img src="assets/classroom-about.png" alt="Interactive Classroom Learning" loading="lazy">
         <div class="gallery-badge">Learning &amp; Play</div>

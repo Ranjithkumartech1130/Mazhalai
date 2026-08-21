@@ -8,5 +8,5 @@ cd admin
 call npm install
 echo.
 echo Starting the development server...
-call npm run dev
-pause
+call npm run dev 
+ 1pause

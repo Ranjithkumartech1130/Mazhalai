@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../supabase'
+import { Upload, Image as ImageIcon } from 'lucide-react'
+
+const IMAGE_BUCKET = 'mazhalai-gallery'
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
+const MAX_IMAGE_SIZE_MB = 8
 
 export default function SiteContentForm() {
   const [formData, setFormData] = useState({
@@ -8,11 +13,14 @@ export default function SiteContentForm() {
   phone: '',
   email: '',
   address: '',
-  hero_image_url: ''
+  hero_image_url: '',
+  about_image_url: ''
 })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
+  const [uploadingHero, setUploadingHero] = useState(false)
+  const [uploadingAbout, setUploadingAbout] = useState(false)
 
   useEffect(() => {
     fetchContent()
@@ -42,6 +50,48 @@ export default function SiteContentForm() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+  const uploadImage = async (file, fieldName, setUploading) => {
+    if (!file) return
+
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      setMessage('Error: Invalid file type. Please use JPEG, PNG, WebP, or GIF.')
+      return
+    }
+    if (file.size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+      setMessage(`Error: File is too large. Maximum size is ${MAX_IMAGE_SIZE_MB}MB.`)
+      return
+    }
+
+    setUploading(true)
+    setMessage('')
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        setMessage('Error: Session expired. Please log in again.')
+        return
+      }
+
+      const ext = file.name.split('.').pop().toLowerCase()
+      const storagePath = `site/${fieldName}_${Date.now()}.${ext}`
+
+      const { error: uploadError } = await supabase.storage
+        .from(IMAGE_BUCKET)
+        .upload(storagePath, file, { cacheControl: '3600', upsert: false, contentType: file.type })
+
+      if (uploadError) throw uploadError
+
+      const { data: urlData } = supabase.storage.from(IMAGE_BUCKET).getPublicUrl(storagePath)
+
+      setFormData(prev => ({ ...prev, [fieldName]: urlData.publicUrl }))
+      setMessage('Image uploaded — click Save Changes below to publish it on the site.')
+    } catch (error) {
+      setMessage(`Error: Upload failed - ${error.message}`)
+    } finally {
+      setUploading(false)
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSaving(true)
@@ -57,7 +107,7 @@ export default function SiteContentForm() {
       setTimeout(() => setMessage(''), 3000)
     } catch (error) {
       console.error('Error saving:', error.message)
-      setMessage('Error saving settings. Please try again.')
+      setMessage(`Error saving settings: ${error.message}`)
     } finally {
       setSaving(false)
     }
@@ -100,6 +150,57 @@ export default function SiteContentForm() {
               rows="3"
               className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent"
             />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Hero Image (Home page banner photo)</label>
+            <div className="flex items-center gap-4">
+              {formData.hero_image_url ? (
+                <img src={formData.hero_image_url} alt="Hero preview" className="h-24 w-32 object-cover rounded-lg border border-gray-200" />
+              ) : (
+                <div className="h-24 w-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-300">
+                  <ImageIcon size={24} />
+                </div>
+              )}
+              <label className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 cursor-pointer hover:bg-gray-50">
+                <Upload size={16} />
+                {uploadingHero ? 'Uploading...' : 'Choose Photo'}
+                <input
+                  type="file"
+                  accept={ALLOWED_IMAGE_TYPES.join(',')}
+                  className="hidden"
+                  disabled={uploadingHero}
+                  onChange={(e) => uploadImage(e.target.files[0], 'hero_image_url', setUploadingHero)}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        {/* About Section */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-bold border-b pb-2">About Section</h3>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">About Image (classroom photo)</label>
+            <div className="flex items-center gap-4">
+              {formData.about_image_url ? (
+                <img src={formData.about_image_url} alt="About preview" className="h-24 w-32 object-cover rounded-lg border border-gray-200" />
+              ) : (
+                <div className="h-24 w-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-300">
+                  <ImageIcon size={24} />
+                </div>
+              )}
+              <label className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 cursor-pointer hover:bg-gray-50">
+                <Upload size={16} />
+                {uploadingAbout ? 'Uploading...' : 'Choose Photo'}
+                <input
+                  type="file"
+                  accept={ALLOWED_IMAGE_TYPES.join(',')}
+                  className="hidden"
+                  disabled={uploadingAbout}
+                  onChange={(e) => uploadImage(e.target.files[0], 'about_image_url', setUploadingAbout)}
+                />
+              </label>
+            </div>
           </div>
         </div>
 

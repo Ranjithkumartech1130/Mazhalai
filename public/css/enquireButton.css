@@ -1,0 +1,341 @@
+/* ============================================================
+   NEON LIQUID "ENQUIRE" BUTTON
+   Reusable effect applied to every .btn-enquire button on the
+   site: idle neon outline -> liquid yellow fill sweeps in -> holds
+   -> dissolves back to the outline. Loops forever. Sizing is fully
+   intrinsic (driven by the label's padding) so it works for buttons
+   of any length, on any screen size — see js/enquireButtonFX.js for
+   the magnetic tilt and sparkle burst.
+   ============================================================ */
+
+:root {
+    --eq-yellow: var(--primary-yellow, #FFE600);
+    --eq-yellow-soft: #FFF48A;
+    --eq-yellow-dark: var(--primary-yellow-dark, #F5C800);
+    --eq-black: var(--primary-black, #111111);
+    --eq-cycle: 5s;
+}
+
+.btn-enquire {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    text-decoration: none;
+    cursor: pointer;
+    transform:
+        perspective(600px)
+        translate3d(var(--eq-magX, 0px), var(--eq-magY, 0px), 0)
+        rotateX(var(--eq-tiltX, 0deg))
+        rotateY(var(--eq-tiltY, 0deg));
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+}
+
+/* soft ambient glow breathing behind the whole button */
+.btn-enquire .eq-ambient {
+    position: absolute;
+    inset: -30px;
+    border-radius: 60px;
+    background: radial-gradient(closest-side, rgba(255,230,0,0.38), transparent 70%);
+    opacity: 0;
+    filter: blur(18px);
+    animation: eqAmbientPulse var(--eq-cycle) ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* dark 3D "base" edge under the button, like a bevelled key-cap */
+.btn-enquire .eq-bevel {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: -7px;
+    height: 14px;
+    border-radius: 0 0 999px 999px;
+    background: linear-gradient(180deg, #151400, #000);
+    opacity: 0;
+    filter: blur(0.5px);
+    animation: eqBevelShow var(--eq-cycle) ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.btn-enquire .eq-pill {
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+    animation: eqGlitchFX var(--eq-cycle) linear infinite;
+}
+
+/* outline / neon stroke layer */
+.btn-enquire .eq-outline {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 2.5px solid var(--eq-yellow);
+    box-shadow:
+        0 0 6px var(--eq-yellow),
+        0 0 16px rgba(255,230,0,0.8),
+        0 0 34px rgba(255,230,0,0.55),
+        inset 0 0 12px rgba(255,230,0,0.35);
+    animation: eqOutlineGlow var(--eq-cycle) ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* clips the goo filter's bleed to the pill shape */
+.btn-enquire .eq-liquid-mask {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.btn-enquire .eq-liquid-group {
+    position: absolute;
+    inset: 0;
+    filter: url(#eqGoo);
+}
+
+.btn-enquire .eq-liquid-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(180deg, var(--eq-yellow-soft) 0%, var(--eq-yellow) 45%, var(--eq-yellow-dark) 100%);
+    animation: eqFillSweep var(--eq-cycle) ease-in-out infinite;
+}
+
+.btn-enquire .eq-liquid-head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--eq-yellow-soft), var(--eq-yellow) 60%, var(--eq-yellow-dark) 100%);
+    animation: eqHeadTravel var(--eq-cycle) ease-in-out infinite;
+}
+
+/* holographic foil sheen riding on top of the solid yellow fill */
+.btn-enquire .eq-liquid-fill::after,
+.btn-enquire .eq-liquid-head::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(115deg,
+        rgba(255,0,150,0.30) 0%,
+        rgba(255,200,0,0.24) 12%,
+        rgba(0,229,255,0.28) 24%,
+        rgba(130,80,255,0.28) 36%,
+        rgba(255,0,150,0.30) 48%);
+    background-size: 260% 260%;
+    mix-blend-mode: color-dodge;
+    opacity: 0.45;
+    animation: eqHoloShift 3s linear infinite;
+}
+.btn-enquire .eq-liquid-head::after { border-radius: 50%; }
+
+/* glossy highlight + bevel, only visible once the liquid covers it */
+.btn-enquire .eq-gloss {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.35) 100%);
+    opacity: 0;
+    animation: eqGlossShow var(--eq-cycle) ease-in-out infinite;
+}
+
+.btn-enquire .eq-label {
+    position: relative;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 34px;
+    letter-spacing: 0.6px;
+    font-weight: 800;
+    font-size: 1.02rem;
+    font-family: var(--font-heading, inherit);
+    text-transform: none;
+    color: var(--eq-yellow);
+    text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6);
+    animation: eqTextFlip var(--eq-cycle) ease-in-out infinite;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* radial highlight that follows the cursor for the magnetic-hover feel */
+.btn-enquire .eq-cursor-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    z-index: 5;
+    pointer-events: none;
+    background: radial-gradient(140px circle at var(--eq-px, 50%) var(--eq-py, 50%), rgba(255,255,255,0.55), transparent 60%);
+    opacity: 0;
+    mix-blend-mode: overlay;
+    transition: opacity .25s ease;
+}
+
+/* faint CRT scanlines for a bit of digital/glitch texture */
+.btn-enquire .eq-scanlines {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    z-index: 6;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom,
+        rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px,
+        transparent 2px, transparent 3px);
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+}
+
+.btn-enquire .eq-arrow {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex: none;
+}
+
+.btn-enquire .eq-arrow-line,
+.btn-enquire .eq-arrow-head {
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: eqArrowNudge var(--eq-cycle) ease-in-out infinite;
+}
+
+/* ---------------- keyframes ---------------- */
+
+@keyframes eqOutlineGlow {
+    0%   { opacity: 1; }
+    28%  { opacity: 1; }
+    38%  { opacity: 0; }
+    78%  { opacity: 0; }
+    92%  { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes eqAmbientPulse {
+    0%   { opacity: 0.15; }
+    35%  { opacity: 0.9; }
+    75%  { opacity: 0.9; }
+    95%  { opacity: 0.2; }
+    100% { opacity: 0.15; }
+}
+
+@keyframes eqFillSweep {
+    0%   { width: 0%; }
+    28%  { width: 0%; }
+    50%  { width: 100%; }
+    78%  { width: 100%; }
+    92%  { width: 0%; }
+    100% { width: 0%; }
+}
+
+@keyframes eqHeadTravel {
+    0%   { left: 0%; opacity: 1; }
+    28%  { left: 0%; opacity: 1; }
+    48%  { left: calc(100% - var(--eq-head-px, 70px)); opacity: 1; }
+    52%  { opacity: 0; }
+    78%  { opacity: 0; }
+    92%  { left: 0%; opacity: 1; }
+    100% { left: 0%; opacity: 1; }
+}
+
+@keyframes eqGlossShow {
+    0%   { opacity: 0; }
+    40%  { opacity: 0; }
+    52%  { opacity: 1; }
+    76%  { opacity: 1; }
+    88%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes eqBevelShow {
+    0%   { opacity: 0; bottom: -3px; }
+    40%  { opacity: 0; }
+    52%  { opacity: 1; bottom: -7px; }
+    76%  { opacity: 1; }
+    88%  { opacity: 0; bottom: -3px; }
+    100% { opacity: 0; }
+}
+
+@keyframes eqTextFlip {
+    0%   { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
+    44%  { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
+    52%  { color: #141200; text-shadow: none; }
+    76%  { color: #141200; text-shadow: none; }
+    88%  { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
+    100% { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
+}
+
+@keyframes eqArrowNudge {
+    0%, 44%  { transform: translateX(0); }
+    50%, 76% { transform: translateX(3px); }
+    100%     { transform: translateX(0); }
+}
+
+@keyframes eqHoloShift {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+@keyframes eqGlitchFX {
+    0%, 5.7%, 6.3%, 14.7%, 15.3%, 43.7%, 44.3%, 88.7%, 89.3%, 100% {
+        filter: none; transform: translateX(0);
+    }
+    6%   { filter: drop-shadow(-3px 0 #ff2b6d) drop-shadow(3px 0 #00e5ff); transform: translateX(-3px) skewX(2deg); }
+    15%  { filter: drop-shadow(3px 0 #ff2b6d) drop-shadow(-3px 0 #00e5ff); transform: translateX(3px) skewX(-2deg); }
+    44%  { filter: drop-shadow(-2px 0 #ff2b6d) drop-shadow(2px 0 #00e5ff); transform: translateX(-2px); }
+    89%  { filter: drop-shadow(2px 0 #ff2b6d) drop-shadow(-2px 0 #00e5ff); transform: translateX(2px); }
+}
+
+/* full-viewport overlay canvas the sparkle burst is drawn on,
+   shared across every .btn-enquire instance */
+#eqSparkleCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-enquire,
+    .btn-enquire .eq-ambient,
+    .btn-enquire .eq-bevel,
+    .btn-enquire .eq-pill,
+    .btn-enquire .eq-outline,
+    .btn-enquire .eq-liquid-fill,
+    .btn-enquire .eq-liquid-head,
+    .btn-enquire .eq-liquid-fill::after,
+    .btn-enquire .eq-liquid-head::after,
+    .btn-enquire .eq-gloss,
+    .btn-enquire .eq-label,
+    .btn-enquire .eq-arrow-line,
+    .btn-enquire .eq-arrow-head {
+        animation: none !important;
+        transform: none !important;
+    }
+    .btn-enquire .eq-outline { opacity: 1; }
+    .btn-enquire .eq-liquid-fill { width: 100%; }
+    .btn-enquire .eq-label { color: var(--eq-black); }
+}
+
+@media (max-width: 560px) {
+    .btn-enquire .eq-label {
+        padding: 14px 26px;
+        font-size: 0.92rem;
+        gap: 8px;
+    }
+}

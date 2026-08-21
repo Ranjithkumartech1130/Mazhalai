@@ -28,7 +28,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename="/admin-app">
       <Routes>
         <Route 
           path="/login" 

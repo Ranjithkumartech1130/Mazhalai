@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     reveal(); // Trigger on load
 
     // Smooth Scrolling for anchor links (if browser doesn't support smooth behavior natively)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]:not(.js-open-admission-form)').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
@@ -108,9 +108,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentPhotoIndex = 0;
     let visibleCards = [];
+    let activeCardSelector = '.gallery-card:not(.hide)';
 
     function updateVisibleCards() {
-        visibleCards = Array.from(document.querySelectorAll('.gallery-card:not(.hide)'));
+        visibleCards = Array.from(document.querySelectorAll(activeCardSelector));
+    }
+
+    function getCardData(card) {
+        if (card.classList.contains('event-card')) {
+            return {
+                img: card.querySelector('img'),
+                badge: card.querySelector('.event-card-badge'),
+                title: card.querySelector('.event-card-title'),
+                desc: card.querySelector('.event-card-desc'),
+                date: card.querySelector('.event-card-date'),
+            };
+        }
+        return {
+            img: card.querySelector('img'),
+            badge: card.querySelector('.gallery-badge'),
+            title: card.querySelector('.gallery-info h3'),
+            desc: card.querySelector('.gallery-info p'),
+            date: card.querySelector('.gallery-date'),
+        };
     }
 
     function openLightbox(index) {
@@ -119,17 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentPhotoIndex = index;
         const card = visibleCards[currentPhotoIndex];
-        const img = card.querySelector('img');
-        const badge = card.querySelector('.gallery-badge');
-        const title = card.querySelector('.gallery-info h3');
-        const desc = card.querySelector('.gallery-info p');
-        const date = card.querySelector('.gallery-date');
+        const { img, badge, title, desc, date } = getCardData(card);
 
         if (img) lightboxImg.src = img.src;
-        if (badge) lightboxBadge.textContent = badge.textContent;
-        if (title) lightboxTitle.textContent = title ? title.textContent : '';
-        if (desc) lightboxDesc.textContent = desc ? desc.textContent : '';
-        if (date) lightboxDate.textContent = date ? date.textContent : '';
+        lightboxBadge.textContent = badge ? badge.textContent : '';
+        lightboxTitle.textContent = title ? title.textContent : '';
+        lightboxDesc.textContent = desc ? desc.textContent : '';
+        lightboxDate.textContent = date ? date.textContent : '';
 
         lightboxModal.classList.add('active');
         lightboxModal.setAttribute('aria-hidden', 'false');
@@ -157,15 +173,22 @@ document.addEventListener('DOMContentLoaded', () => {
         openLightbox(currentPhotoIndex);
     }
 
-    // Attach click events on gallery cards & zoom buttons
+    // Attach click events on gallery cards, event cards & zoom buttons
     document.addEventListener('click', (e) => {
-        const card = e.target.closest('.gallery-card');
-        if (card && !card.classList.contains('hide') && !e.target.closest('.lightbox-content')) {
-            updateVisibleCards();
-            const index = visibleCards.indexOf(card);
-            if (index !== -1) {
-                openLightbox(index);
-            }
+        if (e.target.closest('.lightbox-content')) return;
+
+        const galleryCard = e.target.closest('.gallery-card');
+        const eventCard = e.target.closest('.event-card');
+        const card = galleryCard || eventCard;
+        if (!card) return;
+        if (galleryCard && galleryCard.classList.contains('hide')) return;
+        if (eventCard && !eventCard.querySelector('img')) return;
+
+        activeCardSelector = galleryCard ? '.gallery-card:not(.hide)' : '.event-card';
+        updateVisibleCards();
+        const index = visibleCards.indexOf(card);
+        if (index !== -1) {
+            openLightbox(index);
         }
     });
 

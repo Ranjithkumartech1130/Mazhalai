@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mazhalai Preschool | Early Child Education — Pollachi</title>
-    <meta name="description" content="Mazhalai Preschool — Nurturing young minds through play-based early childhood education in Pollachi. Enroll today!">
+    <meta name="description"
+        content="Mazhalai Preschool — Nurturing young minds through play-based early childhood education in Pollachi. Enroll today!">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Sour+Gummy:wght@800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Sour+Gummy:wght@800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/enquireButton.css">
+    <link rel="stylesheet" href="css/scrollFx.css">
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- GSAP + ScrollTrigger + MotionPathPlugin CDN — powers the scroll reveal, hero parallax and About-section plane trail in js/scrollAnimations.js -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
 </head>
+
 <body>
+
+    <!-- Scroll progress bar — fills as the visitor reads down the page -->
+    <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
 
     <!-- ============================================================
          NAVIGATION
@@ -21,9 +35,10 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#home" class="logo">
-                <img src="assets/logo.png" alt="Mazhalai Preschool Logo" class="logo-img">
+                <img src="S:\pollachi-web-client\WhatsApp Image 2026-08-09 at 7.29.42 PM.jpeg"
+                    alt="Mazhalai Preschool Logo" class="logo-img">
                 <div class="logo-text-group">
-                    <span class="logo-name">Mazhalai</span>
+                    <span class="logo-name">Mazhala<span class="i-foot">ı</span></span>
                     <span class="logo-sub">Early Child Education</span>
                 </div>
             </a>
@@ -32,11 +47,14 @@
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#vision-mission">Vision & Mission</a></li>
                 <li><a href="#programs">Programs</a></li>
+                <li><a href="#academy">Academy</a></li>
+                <li><a href="#afterschool">Afterschool</a></li>
                 <li><a href="#gallery">Our Gallery</a></li>
                 <li><a href="#admissions">Admissions</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="admin-app/index.html" class="btn btn-admin-nav" id="admin-portal-link" title="Admin Portal Login">
+                <a href="admin-app/index.html" class="btn btn-admin-nav" id="admin-portal-link"
+                    title="Admin Portal Login">
                     <span>🔒</span> Admin
                 </a>
                 <a href="#contact" class="btn btn-primary nav-cta">Contact Us</a>
@@ -59,19 +77,50 @@
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
 
+        <!-- Signature parallax shapes — drift at different speeds on scroll (js/scrollAnimations.js) -->
+        <div class="hero-parallax" aria-hidden="true">
+            <div class="hp-wrap hp1" data-speed="0.6"><span class="hp-shape hp-circle hp-yellow"></span></div>
+            <div class="hp-wrap hp2" data-speed="1.6"><span class="hp-shape hp-pill hp-black"></span></div>
+            <div class="hp-wrap hp3" data-speed="0.8"><span class="hp-shape hp-circle hp-outline"></span></div>
+            <div class="hp-wrap hp4" data-speed="1.3"><span class="hp-shape hp-pill hp-yellow-soft"></span></div>
+            <div class="hp-wrap hp5" data-speed="1.9"><span class="hp-shape hp-circle hp-black"></span></div>
+            <div class="hp-wrap hp6" data-speed="1.1"><span class="hp-shape hp-star">✦</span></div>
+        </div>
+
         <div class="container hero-container">
             <div class="hero-content reveal">
                 <div class="pill-badge">🌟 Early Child Education &amp; Teacher Training</div>
                 <h1 class="hero-title" id="hero-title">
-    Where Little Minds<br>
-    <span class="hero-highlight">Blossom &amp; Grow</span>
-</h1>
+                    Where Little Minds<br>
+                    <span class="hero-highlight">Blossom &amp; Grow</span>
+                </h1>
                 <p class="hero-subtitle" id="hero-subtitle">
-    Providing a nurturing, safe, and joyful environment for your child's first steps into the magical world of learning.
-</p>
+                    Providing a nurturing, safe, and joyful environment for your child's first steps into the magical
+                    world of learning.
+                </p>
                 <div class="hero-buttons">
-                    <a href="#admissions" class="btn btn-primary btn-large">
-                        <span>✏️</span> Enroll Now
+                    <a href="#admissions" class="btn-enquire js-open-admission-form">
+                        <span class="eq-ambient" aria-hidden="true"></span>
+                        <span class="eq-bevel" aria-hidden="true"></span>
+                        <span class="eq-pill">
+                            <span class="eq-liquid-mask" aria-hidden="true">
+                                <span class="eq-liquid-group">
+                                    <span class="eq-liquid-fill"></span>
+                                    <span class="eq-liquid-head"></span>
+                                </span>
+                            </span>
+                            <span class="eq-outline" aria-hidden="true"></span>
+                            <span class="eq-gloss" aria-hidden="true"></span>
+                            <span class="eq-label">
+                                <span class="btn-enquire-icon">✏️</span> <span class="btn-enquire-label">Enquire Now</span>
+                                <svg class="eq-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                                    <line class="eq-arrow-line" x1="3" y1="12" x2="19" y2="12" />
+                                    <polyline class="eq-arrow-head" points="13,6 19,12 13,18" />
+                                </svg>
+                            </span>
+                            <span class="eq-cursor-shine" aria-hidden="true"></span>
+                            <span class="eq-scanlines" aria-hidden="true"></span>
+                        </span>
                     </a>
                     <a href="#about" class="btn btn-outline btn-large">
                         <span>📖</span> Learn More
@@ -98,15 +147,72 @@
 
             <div class="hero-image-wrapper reveal reveal-delay">
                 <div class="hero-img-frame">
-                    <img src="assets/school-hero.jpg" alt="Mazhalai Preschool Building" class="hero-img">
+                    <img src="assets/school-hero.jpg" alt="Mazhalai Preschool Building" class="hero-img"
+                        id="hero-image">
                 </div>
+            </div>
+
+            <!-- Always-visible copy of the admission enquiry form (the
+                 floating version at the bottom-right, wired up in
+                 js/admissionForm.js, still opens on demand from every
+                 "Enquire Now" / "Apply for Admission" link elsewhere on the
+                 page) — this one needs no open/close state since it's part
+                 of the hero layout itself. -->
+            <div class="hero-admission-card reveal reveal-delay">
+                <form class="admission-form" id="heroAdmissionForm" novalidate>
+                    <h3 class="admission-form-title">Get Admission Details</h3>
+
+                    <div class="admission-field">
+                        <label class="admission-label" for="heroAdmName">Name</label>
+                        <input class="admission-input" type="text" id="heroAdmName" name="name"
+                            placeholder="Your full name" required>
+                    </div>
+
+                    <div class="admission-field">
+                        <label class="admission-label" for="heroAdmMobile">Mobile</label>
+                        <input class="admission-input" type="tel" id="heroAdmMobile" name="mobile"
+                            placeholder="+91 00000 00000" required>
+                    </div>
+
+                    <div class="admission-field">
+                        <label class="admission-label" for="heroAdmChildAge">Child Age</label>
+                        <select class="admission-input" id="heroAdmChildAge" name="childAge" required>
+                            <option value="" disabled selected>Select child's age</option>
+                            <option value="Below 1.5 years">Below 1.5 years</option>
+                            <option value="1.5 – 2.5 years">1.5 – 2.5 years</option>
+                            <option value="2.5 – 3.5 years">2.5 – 3.5 years</option>
+                            <option value="3.5 – 4.5 years">3.5 – 4.5 years</option>
+                            <option value="4.5 – 5.5 years">4.5 – 5.5 years</option>
+                            <option value="Above 5.5 years">Above 5.5 years</option>
+                        </select>
+                    </div>
+
+                    <div class="admission-field">
+                        <label class="admission-label" for="heroAdmProgram">Program Interested</label>
+                        <select class="admission-input" id="heroAdmProgram" name="program" required>
+                            <option value="" disabled selected>Select a program</option>
+                            <option value="Play Group (1.5 – 2.5 Years)">Play Group (1.5 – 2.5 Years)</option>
+                            <option value="Pre-KG (2.5 – 3.5 Years)">Pre-KG (2.5 – 3.5 Years)</option>
+                            <option value="LKG / UKG (3.5 – 5.5 Years)">LKG / UKG (3.5 – 5.5 Years)</option>
+                        </select>
+                    </div>
+
+                    <p class="admission-status" id="heroAdmissionStatus" role="status" aria-live="polite"></p>
+
+                    <button type="submit" class="admission-submit" id="heroAdmissionSubmitBtn">
+                        <span>Schedule a Visit</span> <span aria-hidden="true">→</span>
+                    </button>
+                </form>
             </div>
         </div>
 
         <!-- Wave Separator -->
         <div class="wave-bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
             </svg>
         </div>
     </header>
@@ -115,17 +221,41 @@
          ABOUT SECTION
     ============================================================ -->
     <section id="about" class="about section">
+        <!-- Paper-plane scroll trail — flies in along its path as this section enters view -->
+        <div class="plane-fx" aria-hidden="true">
+            <svg class="plane-fx-svg" viewBox="0 0 1000 1700" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="planeGradA" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#FFF48A" />
+                        <stop offset="100%" stop-color="#F5C800" />
+                    </linearGradient>
+                    <linearGradient id="planeGradB" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#3A3A3A" />
+                        <stop offset="100%" stop-color="#111111" />
+                    </linearGradient>
+                </defs>
+                <path id="planeTrailPath" class="plane-trail-path"
+                    d="M 940 40 C 760 60 680 140 620 180 C 480 260 380 260 300 340 C 160 420 100 560 90 720 C 80 860 100 940 150 1020 C 260 1140 420 1140 520 1180 C 700 1240 820 1220 880 1320 C 920 1400 840 1480 700 1500" />
+                <g class="plane-icon" transform="translate(940,40)">
+                    <polygon points="-18,10 8,-22 8,26" fill="url(#planeGradA)" />
+                    <polygon points="8,-22 34,12 8,26" fill="url(#planeGradB)" />
+                    <polygon points="-18,10 8,26 0,34" fill="url(#planeGradA)" />
+                </g>
+            </svg>
+        </div>
         <div class="container">
             <!-- Section heading -->
             <div class="about-header text-center reveal">
                 <div class="section-label">About Us</div>
                 <h2 class="section-title">Nurturing the <span class="highlight">Future</span></h2>
-                <p class="about-lead">At Mazhalai Preschool, we believe early childhood education is the foundation of a lifetime of learning — blending structured lessons with the joy of free play.</p>
+                <p class="about-lead">At Mazhalai Preschool, we believe early childhood education is the foundation of a
+                    lifetime of learning — blending structured lessons with the joy of free play.</p>
             </div>
 
             <!-- Full-width image with overlay chips -->
             <div class="about-hero-img-wrap reveal">
-                <img src="assets/classroom-about.png" alt="Children learning at Mazhalai Preschool" class="about-hero-img">
+                <img src="assets/classroom-about.png" alt="Children learning at Mazhalai Preschool"
+                    class="about-hero-img" id="about-image">
                 <div class="about-overlay-chips">
                     <span class="chip chip-black">🎨 Play-Based Learning</span>
                     <span class="chip chip-yellow">📚 Expert Teachers</span>
@@ -133,35 +263,30 @@
                 </div>
             </div>
 
-            <!-- Feature pills row -->
-            <div class="about-pills-row reveal">
-                <div class="about-pill">
-                    <div class="pill-icon">🌱</div>
-                    <div>
-                        <strong>Play-Based Learning</strong>
-                        <p>Children learn best through play — we make every lesson an adventure.</p>
-                    </div>
+            <!-- Our Strengths -->
+            <div class="why-grid reveal">
+                <div class="why-card">
+                    <div class="why-icon">🧠</div>
+                    <h4>Expert Curriculum</h4>
+                    <p>Designed by child development specialists blending global best practices with Indian values.</p>
                 </div>
-                <div class="about-pill">
-                    <div class="pill-icon">🛡️</div>
-                    <div>
-                        <strong>Safe &amp; Secure</strong>
-                        <p>A monitored, hygienic, and fully secure campus your child will love.</p>
-                    </div>
+                <div class="why-card">
+                    <div class="why-icon">🛡️</div>
+                    <h4>100% Safe Campus</h4>
+                    <p>CCTV-monitored campus, qualified staff, hygienic facilities to ensure child safety at all times.
+                    </p>
                 </div>
-                <div class="about-pill">
-                    <div class="pill-icon">👩‍🏫</div>
-                    <div>
-                        <strong>Caring Educators</strong>
-                        <p>Trained, passionate teachers who treat every child like family.</p>
-                    </div>
+                <div class="why-card">
+                    <div class="why-icon">🌈</div>
+                    <h4>Holistic Growth</h4>
+                    <p>We nurture creativity, emotions, and intellect equally — raising well-rounded, happy children.
+                    </p>
                 </div>
-                <div class="about-pill">
-                    <div class="pill-icon">💛</div>
-                    <div>
-                        <strong>Holistic Development</strong>
-                        <p>Mind, body, and soul — we nurture the whole child, every day.</p>
-                    </div>
+                <div class="why-card">
+                    <div class="why-icon">👩‍🏫</div>
+                    <h4>Trained Educators</h4>
+                    <p>Our teachers are trained in early childhood psychology and provide a warm, patient environment.
+                    </p>
                 </div>
             </div>
         </div>
@@ -184,7 +309,7 @@
 
             <div class="vm-grid">
                 <!-- Vision Card -->
-                <div class="vm-card vm-vision reveal">
+                <div class="vm-card vm-vision reveal reveal-left">
                     <div class="vm-card-glow"></div>
                     <div class="vm-icon-ring">
                         <span class="vm-main-icon">🌅</span>
@@ -193,7 +318,9 @@
                     <div class="vm-label-tag">Our Vision</div>
                     <h3 class="vm-card-title">Shaping Tomorrow's<br>Leaders Today</h3>
                     <p class="vm-card-text">
-                        To be the most trusted early childhood institution in Pollachi — where every child discovers their unique potential, develops a lifelong love for learning, and grows into a confident, compassionate, and creative individual ready to inspire the world.
+                        To be the most trusted early childhood institution in Pollachi — where every child discovers
+                        their unique potential, develops a lifelong love for learning, and grows into a confident,
+                        compassionate, and creative individual ready to inspire the world.
                     </p>
                     <div class="vm-pillars">
                         <span class="vm-pillar"><span>🌟</span> Excellence</span>
@@ -204,13 +331,50 @@
 
                 <!-- Decorative Divider -->
                 <div class="vm-divider reveal">
-                    <div class="vm-divider-line"></div>
-                    <div class="vm-divider-emblem">✦</div>
-                    <div class="vm-divider-line"></div>
+                    <div class="vm-divider-line" id="vmLineTop"></div>
+
+                    <!-- Spinning, drifting, bobbing windmill (js/scrollAnimations.js
+                         + the vmWindmillBob keyframe in scrollFx.css) — brand
+                         yellow/black petals in place of gsap.com's demo colors.
+                         Three independent transform layers so the motions don't
+                         fight each other: wrap = scroll drift (GSAP), float =
+                         continuous up/down bob (CSS), svg = scroll rotation
+                         (GSAP). Never pinned, so it can't leave a layout gap. -->
+                    <div class="vm-windmill-wrap" id="vmWindmillWrap">
+                      <div class="vm-windmill-float">
+                        <svg class="vm-windmill" id="vmWindmillSvg" viewBox="0 0 200 200" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="vmPetalYellow" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#FFF48A" />
+                                    <stop offset="100%" stop-color="#F5C800" />
+                                </linearGradient>
+                                <linearGradient id="vmPetalBlack" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#3A3A3A" />
+                                    <stop offset="100%" stop-color="#111111" />
+                                </linearGradient>
+                            </defs>
+                            <g transform="rotate(0 100 100)">
+                                <path d="M100,100 C60,100 40,70 40,40 C70,40 100,60 100,100 Z" fill="url(#vmPetalYellow)" />
+                            </g>
+                            <g transform="rotate(90 100 100)">
+                                <path d="M100,100 C60,100 40,70 40,40 C70,40 100,60 100,100 Z" fill="url(#vmPetalBlack)" />
+                            </g>
+                            <g transform="rotate(180 100 100)">
+                                <path d="M100,100 C60,100 40,70 40,40 C70,40 100,60 100,100 Z" fill="url(#vmPetalYellow)" />
+                            </g>
+                            <g transform="rotate(270 100 100)">
+                                <path d="M100,100 C60,100 40,70 40,40 C70,40 100,60 100,100 Z" fill="url(#vmPetalBlack)" />
+                            </g>
+                            <circle cx="100" cy="100" r="10" fill="#111111" stroke="#FFE600" stroke-width="3" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div class="vm-divider-line" id="vmLineBottom"></div>
                 </div>
 
                 <!-- Mission Card -->
-                <div class="vm-card vm-mission reveal">
+                <div class="vm-card vm-mission reveal reveal-right">
                     <div class="vm-card-glow vm-glow-dark"></div>
                     <div class="vm-icon-ring vm-icon-dark">
                         <span class="vm-main-icon">🎯</span>
@@ -219,7 +383,9 @@
                     <div class="vm-label-tag vm-tag-dark">Our Mission</div>
                     <h3 class="vm-card-title">Nurturing Every Child<br>With Heart &amp; Purpose</h3>
                     <p class="vm-card-text">
-                        To provide a safe, joyful, and stimulating environment where children from 1.5 to 5.5 years thrive through play-based learning, expert guidance, and holistic development — empowering families with an education that blends the best of modern pedagogy with timeless Indian values.
+                        To provide a safe, joyful, and stimulating environment where children from 1.5 to 5.5 years
+                        thrive through play-based learning, expert guidance, and holistic development — empowering
+                        families with an education that blends the best of modern pedagogy with timeless Indian values.
                     </p>
                     <div class="vm-pillars">
                         <span class="vm-pillar vm-pillar-dark"><span>🛡️</span> Safety</span>
@@ -260,6 +426,46 @@
     </section>
 
     <!-- ============================================================
+         PROGRAMS -> ACADEMY -> AFTERSCHOOL SCROLL TRAIL
+         A vertical winding tube pinned in the right-hand gutter (outside
+         .container, so it never overlaps card content), running the full
+         height of these three sections. Same stroke-dashoffset reveal as
+         the About plane trail, but the travelling ball is a plain HTML
+         div (not an SVG shape) — the tube's viewBox gets stretched
+         non-uniformly to match each page's real content height, which
+         would squash an SVG circle into an ellipse; a separate div placed
+         with plain top/left math stays perfectly round. See
+         initWormTrail() in js/scrollAnimations.js. Desktop-only: hidden
+         below 1400px where the gutter gets too narrow for it (see
+         scrollFx.css) — sized to comfortably fit common 1440/1536/1920
+         desktop widths, not just very wide monitors.
+
+         #wormBall is a position-only layer (JS sets its translate every
+         scroll tick); .worm-ball-core inside it owns the round shape,
+         glow and idle pulse animation — splitting them keeps the CSS
+         pulse (which animates transform: scale) from fighting the JS
+         translate on the same property, same trick as the vm-windmill's
+         wrap/float/svg layering.
+    ============================================================ -->
+    <div class="worm-vertical-wrap">
+        <div class="worm-vertical-fx" aria-hidden="true">
+            <svg class="worm-vertical-svg" id="wormSvg" viewBox="0 0 90 4200" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="wormTrailGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#FFF48A" />
+                        <stop offset="45%" stop-color="#FFE600" />
+                        <stop offset="100%" stop-color="#111111" />
+                    </linearGradient>
+                </defs>
+                <path id="wormTrailPath" class="worm-trail-path"
+                    d="M 45 0 C 45 350 15 350 15 700 C 15 1050 75 1050 75 1400 C 75 1750 15 1750 15 2100 C 15 2450 75 2450 75 2800 C 75 3150 15 3150 15 3500 C 15 3850 45 3850 45 4200" />
+            </svg>
+            <div class="worm-ball" id="wormBall">
+                <div class="worm-ball-core"></div>
+            </div>
+        </div>
+
+    <!-- ============================================================
          PROGRAMS SECTION
     ============================================================ -->
     <section id="programs" class="programs section bg-light">
@@ -272,14 +478,15 @@
 
             <div class="programs-grid" id="programsGrid">
                 <!-- Card 1 -->
-                <div class="program-card reveal">
+                <div class="program-card reveal reveal-pop">
                     <div class="card-icon-wrap yellow-wrap">🌱</div>
                     <div class="card-header bg-yellow">
                         <h3>Play Group</h3>
                         <span class="age-tag">1.5 – 2.5 Years</span>
                     </div>
                     <div class="card-body">
-                        <p>A gentle, loving introduction to learning through guided play, sensory exploration, and joyful social interaction.</p>
+                        <p>A gentle, loving introduction to learning through guided play, sensory exploration, and
+                            joyful social interaction.</p>
                         <div class="card-tags">
                             <span class="tag">Sensory Play</span>
                             <span class="tag">Social Skills</span>
@@ -288,14 +495,15 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="program-card reveal" style="animation-delay:0.1s">
+                <div class="program-card reveal reveal-pop">
                     <div class="card-icon-wrap black-wrap">🚀</div>
                     <div class="card-header bg-black">
                         <h3 class="text-white">Pre-KG</h3>
                         <span class="age-tag text-yellow">2.5 – 3.5 Years</span>
                     </div>
                     <div class="card-body">
-                        <p>Focusing on language development, motor skills, and early cognitive concepts in a stimulating environment.</p>
+                        <p>Focusing on language development, motor skills, and early cognitive concepts in a stimulating
+                            environment.</p>
                         <div class="card-tags">
                             <span class="tag">Language</span>
                             <span class="tag">Motor Skills</span>
@@ -304,14 +512,15 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="program-card reveal" style="animation-delay:0.2s">
+                <div class="program-card reveal reveal-pop">
                     <div class="card-icon-wrap yellow-wrap">🎓</div>
                     <div class="card-header bg-yellow">
                         <h3>LKG / UKG</h3>
                         <span class="age-tag">3.5 – 5.5 Years</span>
                     </div>
                     <div class="card-body">
-                        <p>A comprehensive school readiness program emphasizing reading, writing, numeracy, and critical thinking skills.</p>
+                        <p>A comprehensive school readiness program emphasizing reading, writing, numeracy, and critical
+                            thinking skills.</p>
                         <div class="card-tags">
                             <span class="tag">Reading</span>
                             <span class="tag">Writing</span>
@@ -324,38 +533,273 @@
     </section>
 
     <!-- ============================================================
-         WHY CHOOSE US (NEW SECTION)
+         MAZHALAI ACADEMY SECTION
     ============================================================ -->
-    <section class="why-us section">
+    <section id="academy" class="academy section">
         <div class="container">
             <div class="section-header text-center reveal">
-                <div class="section-label">Our Strengths</div>
-                <h2 class="section-title">Why Choose <span class="highlight">Mazhalai?</span></h2>
+                <div class="section-label">Mazhalai Academy</div>
+                <h2 class="section-title">Build a Career in <span class="highlight">Early Childhood Education</span>
+                </h2>
+                <p>Growing demand for quality early education means growing demand for trained professionals.
+                    Mazhalai Academy prepares teachers, staff, and preschool owners with hands-on, industry-ready
+                    training.</p>
             </div>
+
+            <!-- Professional Trainings -->
+            <h3 class="academy-subhead reveal">Professional Training Programs</h3>
             <div class="why-grid">
                 <div class="why-card reveal">
-                    <div class="why-icon">🧠</div>
-                    <h4>Expert Curriculum</h4>
-                    <p>Designed by child development specialists blending global best practices with Indian values.</p>
-                </div>
-                <div class="why-card reveal">
-                    <div class="why-icon">🛡️</div>
-                    <h4>100% Safe Campus</h4>
-                    <p>CCTV-monitored campus, qualified staff, hygienic facilities to ensure child safety at all times.</p>
-                </div>
-                <div class="why-card reveal">
-                    <div class="why-icon">🌈</div>
-                    <h4>Holistic Growth</h4>
-                    <p>We nurture creativity, emotions, and intellect equally — raising well-rounded, happy children.</p>
+                    <div class="why-icon">💼</div>
+                    <h4>Business Management Training</h4>
+                    <p>Operations, marketing, and financial planning skills for preschool owners and administrators.</p>
                 </div>
                 <div class="why-card reveal">
                     <div class="why-icon">👩‍🏫</div>
-                    <h4>Trained Educators</h4>
-                    <p>Our teachers are trained in early childhood psychology and provide a warm, patient environment.</p>
+                    <h4>Preschool Teacher Training</h4>
+                    <p>Hands-on pedagogy, classroom management, and child psychology for aspiring preschool
+                        educators.</p>
                 </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🍼</div>
+                    <h4>Daycare Staff &amp; Nannies Training</h4>
+                    <p>Childcare fundamentals, safety, hygiene, and nurturing practices for daycare support staff and
+                        nannies.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🏫</div>
+                    <h4>Preschool Owners Training</h4>
+                    <p>Everything needed to start and run a successful preschool — from setup to daily operations.
+                    </p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">🧑‍💼</div>
+                    <h4>Centerhead Training</h4>
+                    <p>Leadership and center management skills for those overseeing preschool branch operations.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon">📋</div>
+                    <h4>Preschool Administration Training</h4>
+                    <p>Compliance, documentation, enrollment, and administrative systems for smooth day-to-day
+                        running.</p>
+                </div>
+            </div>
+
+            <!-- Diploma Courses -->
+            <h3 class="academy-subhead reveal">Diploma Courses</h3>
+            <div class="programs-grid">
+                <div class="program-card reveal reveal-pop">
+                    <div class="card-icon-wrap yellow-wrap">🎓</div>
+                    <div class="card-header bg-yellow">
+                        <h3>ECCE</h3>
+                        <span class="age-tag">Diploma Course</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Diploma in Early Childhood Care and Education — foundational theory and practice for early
+                            learning.</p>
+                    </div>
+                </div>
+                <div class="program-card reveal reveal-pop">
+                    <div class="card-icon-wrap black-wrap">🧩</div>
+                    <div class="card-header bg-black">
+                        <h3 class="text-white">Montessori</h3>
+                        <span class="age-tag text-yellow">Diploma Course</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Diploma in Montessori Teacher Training — child-led learning methodology and materials
+                            mastery.</p>
+                    </div>
+                </div>
+                <div class="program-card reveal reveal-pop">
+                    <div class="card-icon-wrap yellow-wrap">📖</div>
+                    <div class="card-header bg-yellow">
+                        <h3>Nursery &amp; Primary</h3>
+                        <span class="age-tag">Diploma Course</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Diploma in Nursery and Primary Teacher Training — a strong grounding for early-grade
+                            educators.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Train With Us — value props -->
+            <!-- Floating brand shapes drift/rotate on scroll behind this
+                 heading + marquee, same gsap.com-inspired technique as the
+                 hero's .hp-wrap shapes (initHeroParallax) — see
+                 initAcademyValuesParallax() in js/scrollAnimations.js. -->
+            <div class="academy-values-wrap">
+                <div class="academy-values-fx" aria-hidden="true">
+                    <div class="hp-wrap av1" data-speed="0.6"><span class="hp-shape hp-circle hp-yellow"></span></div>
+                    <div class="hp-wrap av2" data-speed="1.7"><span class="hp-shape hp-pill hp-black"></span></div>
+                    <div class="hp-wrap av3" data-speed="0.9"><span class="hp-shape hp-circle hp-outline"></span></div>
+                    <div class="hp-wrap av4" data-speed="1.4"><span class="hp-shape hp-pill hp-yellow-soft"></span></div>
+                    <div class="hp-wrap av5" data-speed="1.9"><span class="hp-shape hp-star">✦</span></div>
+                </div>
+
+                <div class="academy-values-content">
+                    <!-- id="wormTrailEnd" marks where the Programs->Academy
+                         scroll trail (see the comment near
+                         .worm-vertical-wrap above) must finish drawing and
+                         physically stop — it shouldn't run through this
+                         marquee or into Afterschool. -->
+                    <h3 class="academy-subhead reveal" id="wormTrailEnd">Why Train With Mazhalai Academy</h3>
+                    <!-- Two shorter rows instead of one long 11-chip line —
+                         easier to read at a glance, and each row needs half
+                         the scroll travel of a single combined line.
+                         .values-marquee-drag lets visitors grab and swipe
+                         the chips sideways themselves; it owns its own x
+                         offset and springs back to 0 on release, layered
+                         OVER the scroll-driven .values-marquee-track (which
+                         owns xPercent) so the two transforms never fight —
+                         see initMarqueeDrag() in js/scrollAnimations.js. -->
+                    <div class="values-marquee-rows">
+                        <div class="values-marquee reveal">
+                            <div class="values-marquee-drag" data-marquee-drag>
+                                <div class="values-marquee-track" id="academyMarquee">
+                                    <span class="chip chip-black">📈 Growing Demand for ECE</span>
+                                    <span class="chip chip-yellow">🧠 Holistic Child Development</span>
+                                    <span class="chip chip-black">🗂️ Strategic Operational Management</span>
+                                    <span class="chip chip-yellow">✅ Regulatory Compliance</span>
+                                    <span class="chip chip-black">📣 Marketing &amp; Enrollment Strategy</span>
+                                    <span class="chip chip-yellow">⚙️ Effective Operational Management</span>
+                                    <!-- duplicate set — enables a seamless -50% loop -->
+                                    <span class="chip chip-black" aria-hidden="true">📈 Growing Demand for ECE</span>
+                                    <span class="chip chip-yellow" aria-hidden="true">🧠 Holistic Child Development</span>
+                                    <span class="chip chip-black" aria-hidden="true">🗂️ Strategic Operational Management</span>
+                                    <span class="chip chip-yellow" aria-hidden="true">✅ Regulatory Compliance</span>
+                                    <span class="chip chip-black" aria-hidden="true">📣 Marketing &amp; Enrollment Strategy</span>
+                                    <span class="chip chip-yellow" aria-hidden="true">⚙️ Effective Operational Management</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values-marquee reveal">
+                            <div class="values-marquee-drag" data-marquee-drag>
+                                <div class="values-marquee-track" id="academyMarquee2">
+                                    <span class="chip chip-yellow">💰 Financial Planning &amp; Sustainability</span>
+                                    <span class="chip chip-black">🤝 Leadership &amp; Team Development</span>
+                                    <span class="chip chip-yellow">📚 Curriculum Development &amp; Design</span>
+                                    <span class="chip chip-black">👨‍👩‍👧 Parent &amp; Community Engagement</span>
+                                    <span class="chip chip-yellow">💻 Technology Integration</span>
+                                    <!-- duplicate set — enables a seamless -50% loop -->
+                                    <span class="chip chip-yellow" aria-hidden="true">💰 Financial Planning &amp; Sustainability</span>
+                                    <span class="chip chip-black" aria-hidden="true">🤝 Leadership &amp; Team Development</span>
+                                    <span class="chip chip-yellow" aria-hidden="true">📚 Curriculum Development &amp; Design</span>
+                                    <span class="chip chip-black" aria-hidden="true">👨‍👩‍👧 Parent &amp; Community Engagement</span>
+                                    <span class="chip chip-yellow" aria-hidden="true">💻 Technology Integration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="academy-cta reveal text-center">
+                <a href="#contact" class="btn-enquire js-open-admission-form">
+                    <span class="eq-ambient" aria-hidden="true"></span>
+                    <span class="eq-bevel" aria-hidden="true"></span>
+                    <span class="eq-pill">
+                        <span class="eq-liquid-mask" aria-hidden="true">
+                            <span class="eq-liquid-group">
+                                <span class="eq-liquid-fill"></span>
+                                <span class="eq-liquid-head"></span>
+                            </span>
+                        </span>
+                        <span class="eq-outline" aria-hidden="true"></span>
+                        <span class="eq-gloss" aria-hidden="true"></span>
+                        <span class="eq-label">
+                            <span class="btn-enquire-icon">🎓</span> <span class="btn-enquire-label">Enquire About Academy Courses</span>
+                            <svg class="eq-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                                <line class="eq-arrow-line" x1="3" y1="12" x2="19" y2="12" />
+                                <polyline class="eq-arrow-head" points="13,6 19,12 13,18" />
+                            </svg>
+                        </span>
+                        <span class="eq-cursor-shine" aria-hidden="true"></span>
+                        <span class="eq-scanlines" aria-hidden="true"></span>
+                    </span>
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- ============================================================
+         AFTERSCHOOL ACTIVITIES SECTION
+    ============================================================ -->
+    <section id="afterschool" class="afterschool section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <div class="section-label">Beyond the Classroom</div>
+                <h2 class="section-title">Afterschool <span class="highlight">Activities</span></h2>
+                <p>Skill-building programs for children from KG through Grade 12 — building confidence, creativity,
+                    and discipline outside school hours.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">🥋</div>
+                    <h4>Karate &amp; Silambam</h4>
+                    <p>Traditional martial arts building discipline, strength, and self-defense skills.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">🧘</div>
+                    <h4>Yoga (Kids &amp; Adults)</h4>
+                    <p>Breathing, flexibility, and mindfulness sessions for both children and adults.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">🎨</div>
+                    <h4>Art &amp; Craft</h4>
+                    <p>Creative hands-on projects that spark imagination and fine motor skills.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">✏️</div>
+                    <h4>Drawing Class</h4>
+                    <p>Sketching and creative drawing techniques for young artists.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">🔤</div>
+                    <h4>Phonics Class</h4>
+                    <p>Strong reading foundations through structured phonics-based learning.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">✍️</div>
+                    <h4>Handwriting Class</h4>
+                    <p>Neat, confident handwriting built through guided practice.</p>
+                </div>
+                <div class="why-card reveal reveal-pop">
+                    <div class="why-icon">📚</div>
+                    <h4>Tuition Center</h4>
+                    <p>Subject-wise academic support and homework guidance for school-going children.</p>
+                </div>
+            </div>
+
+            <div class="academy-cta reveal text-center">
+                <a href="#contact" class="btn-enquire js-open-admission-form">
+                    <span class="eq-ambient" aria-hidden="true"></span>
+                    <span class="eq-bevel" aria-hidden="true"></span>
+                    <span class="eq-pill">
+                        <span class="eq-liquid-mask" aria-hidden="true">
+                            <span class="eq-liquid-group">
+                                <span class="eq-liquid-fill"></span>
+                                <span class="eq-liquid-head"></span>
+                            </span>
+                        </span>
+                        <span class="eq-outline" aria-hidden="true"></span>
+                        <span class="eq-gloss" aria-hidden="true"></span>
+                        <span class="eq-label">
+                            <span class="btn-enquire-icon">🎒</span> <span class="btn-enquire-label">Enquire About Afterschool Activities</span>
+                            <svg class="eq-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                                <line class="eq-arrow-line" x1="3" y1="12" x2="19" y2="12" />
+                                <polyline class="eq-arrow-head" points="13,6 19,12 13,18" />
+                            </svg>
+                        </span>
+                        <span class="eq-cursor-shine" aria-hidden="true"></span>
+                        <span class="eq-scanlines" aria-hidden="true"></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+    </div>
 
     <!-- ============================================================
          OUR GALLERY SECTION (PAST EVENTS)
@@ -365,7 +809,8 @@
             <div class="section-header text-center reveal">
                 <div class="section-label">Cherished Memories</div>
                 <h2 class="section-title">Our <span class="highlight">Gallery</span></h2>
-                <p>Glimpses of unforgettable celebrations, sports days, creative workshops, and joyful everyday learning at Mazhalai Preschool.</p>
+                <p>Glimpses of unforgettable celebrations, sports days, creative workshops, and joyful everyday learning
+                    at Mazhalai Preschool.</p>
             </div>
 
             <!-- Filter Categories -->
@@ -425,15 +870,16 @@
     ============================================================ -->
     <section id="admissions" class="cta section text-center">
         <div class="cta-inner">
-            <!-- Decorative doodles -->
-            <div class="cta-doodle cta-doodle-1">🌟</div>
-            <div class="cta-doodle cta-doodle-2">🎈</div>
-            <div class="cta-doodle cta-doodle-3">📚</div>
+            <!-- Decorative doodles — drift on scroll (js/scrollAnimations.js) -->
+            <div class="cta-doodle-wrap cdw-1" data-speed="0.7"><span class="cta-doodle">🌟</span></div>
+            <div class="cta-doodle-wrap cdw-2" data-speed="1.5"><span class="cta-doodle">🎈</span></div>
+            <div class="cta-doodle-wrap cdw-3" data-speed="1.1"><span class="cta-doodle">📚</span></div>
             <div class="container">
-                <div class="section-label white-label">Admissions Open</div>
-                <h2 class="cta-title">Ready to Join Our Family?</h2>
-                <p class="cta-desc">Admissions are now open for the upcoming academic year. Give your child the best start in life by securing their spot at Mazhalai Preschool today!</p>
-                <a href="#contact" class="btn btn-black btn-large">Apply for Admission →</a>
+                <div class="section-label white-label reveal">Admissions Open</div>
+                <h2 class="cta-title reveal reveal-pop">Ready to Join Our Family?</h2>
+                <p class="cta-desc reveal">Admissions are now open for the upcoming academic year. Give your child the best
+                    start in life by securing their spot at Mazhalai Preschool today!</p>
+                <a href="#contact" class="btn btn-black btn-large js-open-admission-form reveal reveal-delay">Apply for Admission →</a>
             </div>
         </div>
     </section>
@@ -446,48 +892,49 @@
             <div class="section-header text-center reveal">
                 <div class="section-label">Direct Leadership Access</div>
                 <h2 class="section-title">Get in Touch with Our <span class="highlight">Leadership</span></h2>
-                <p>Have questions about admissions, early child development, or campus visits? Connect directly with our core leadership team.</p>
+                <p>Have questions about admissions, early child development, or campus visits? Connect directly with our
+                    core leadership team.</p>
             </div>
 
             <!-- Leadership Contact Cards Grid -->
             <div class="leadership-grid">
-                <!-- Card 1: Chairman -->
-                <div class="leadership-card reveal">
-                    <div class="lc-badge">👑 Leadership</div>
-                    <div class="lc-icon-wrap">👑</div>
-                    <h3>Chairman</h3>
-                    <p class="lc-role">Educational Vision &amp; Governance</p>
-                    <div class="lc-divider"></div>
-                    <a href="tel:+919842212345" class="btn btn-primary lc-btn">
-                        <span>📞</span> Call Chairman
-                    </a>
-                    <span class="lc-phone-display">+91 98422 12345</span>
-                </div>
-
-                <!-- Card 2: Director -->
-                <div class="leadership-card featured reveal" style="animation-delay:0.1s">
-                    <div class="lc-badge featured-badge">🎓 Academic Lead</div>
+                <!-- Card 1: Director -->
+                <div class="leadership-card reveal reveal-left">
+                    <div class="lc-badge">🎓 Leadership</div>
                     <div class="lc-icon-wrap">🎓</div>
                     <h3>Director</h3>
-                    <p class="lc-role">Curriculum &amp; Child Development</p>
+                    <p class="lc-role">Educational Vision &amp; Governance</p>
                     <div class="lc-divider"></div>
-                    <a href="tel:+919842267890" class="btn btn-primary lc-btn">
+                    <a href="tel:+919940760957" class="btn btn-primary lc-btn">
                         <span>📞</span> Call Director
                     </a>
-                    <span class="lc-phone-display">+91 98422 67890</span>
+                    <span class="lc-phone-display">+91 99407 60957</span>
                 </div>
 
-                <!-- Card 3: Owner -->
-                <div class="leadership-card reveal" style="animation-delay:0.2s">
-                    <div class="lc-badge">📱 Administration</div>
-                    <div class="lc-icon-wrap">📱</div>
-                    <h3>Owner &amp; Founder</h3>
-                    <p class="lc-role">Student Safety &amp; Daily Operations</p>
+                <!-- Card 2: Principal -->
+                <div class="leadership-card featured reveal reveal-pop">
+                    <div class="lc-badge featured-badge">📚 Academic Lead</div>
+                    <div class="lc-icon-wrap">📚</div>
+                    <h3>Principal</h3>
+                    <p class="lc-role">Curriculum &amp; Child Development</p>
                     <div class="lc-divider"></div>
                     <a href="tel:+919500446103" class="btn btn-primary lc-btn">
-                        <span>📞</span> Call Owner
+                        <span>📞</span> Call Principal
                     </a>
                     <span class="lc-phone-display">+91 95004 46103</span>
+                </div>
+
+                <!-- Card 3: Office -->
+                <div class="leadership-card reveal reveal-right">
+                    <div class="lc-badge">📱 Administration</div>
+                    <div class="lc-icon-wrap">📱</div>
+                    <h3>Office</h3>
+                    <p class="lc-role">General Enquiries &amp; Admissions</p>
+                    <div class="lc-divider"></div>
+                    <a href="tel:+914259469594" class="btn btn-primary lc-btn">
+                        <span>📞</span> Call Office
+                    </a>
+                    <span class="lc-phone-display">04259 469 594</span>
                 </div>
             </div>
 
@@ -497,7 +944,12 @@
                     <div class="cic-icon">📍</div>
                     <div>
                         <h4>Visit Our Campus</h4>
-                        <p><a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">29, Om Shanthinagar, Opposite to Lathangi School, T.Kottampatty, Pollachi - 642 002 📍</a></p>
+                        <p><a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1"
+                                target="_blank" rel="noopener noreferrer"
+                                style="color: inherit; text-decoration: underline;">No. 4, Rajarajeswari Nagar-2,
+                                T.Kottampatty, Pollachi - 642 002 📍</a></p>
+                        <p style="margin-top:6px;">No. 9, Rajarajeswari Nagar-2, Backside of Smart Bazar,
+                            T.Kottampatty, Pollachi - 642 002</p>
                     </div>
                 </div>
                 <div class="cic-divider"></div>
@@ -520,13 +972,15 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="assets/logo.png" alt="Mazhalai Preschool" class="footer-logo-img">
+                    <img src="S:\pollachi-web-client\WhatsApp Image 2026-08-09 at 7.29.42 PM.jpeg"
+                        alt="Mazhalai Preschool" class="footer-logo-img">
                     <div>
-                        <span class="footer-name">Mazhalai <span class="highlight-yellow">Preschool</span></span>
+                        <span class="footer-name">மழலை <span class="highlight-yellow">Preschool</span></span>
                         <p class="footer-tagline">A Unit of Sunflower Educational Charitable Trust</p>
                     </div>
                 </div>
-                <p>Nurturing little minds with love, creativity, and expert guidance since 2026. Join us in shaping a brighter future.</p>
+                <p>Nurturing little minds with love, creativity, and expert guidance since 2024. Join us in shaping a
+                    brighter future.</p>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
@@ -535,6 +989,8 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#vision-mission">Vision & Mission</a></li>
                     <li><a href="#programs">Programs</a></li>
+                    <li><a href="#academy">Academy</a></li>
+                    <li><a href="#afterschool">Afterschool</a></li>
                     <li><a href="#gallery">Our Gallery</a></li>
                     <li><a href="#admissions">Admissions</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -542,21 +998,31 @@
             </div>
             <div class="footer-social">
                 <h4>Follow Us</h4>
-                <p style="color:#9CA3AF; font-size:0.9rem; margin-bottom:15px;">Stay connected for updates and activities!</p>
+                <p style="color:#9CA3AF; font-size:0.9rem; margin-bottom:15px;">Stay connected for updates and
+                    activities!</p>
                 <div class="social-icons">
-                    <a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1" target="_blank" rel="noopener noreferrer" aria-label="Google Info" title="Google Business Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 9.61 16 7 16A8 8 0 1 1 7 0c2.19 0 4.036.8 5.443 2.125l-2.008 2.008C9.52 3.27 8.396 2.8 7 2.8a5.2 5.2 0 1 0 0 10.4c2.81 0 4.182-1.78 4.387-2.736H7V7.741h8.545z"/>
+                    <a href="https://www.google.com/search?kgmid=%2Fg%2F11ym_kd30x&amp;hl=en-IN&amp;q=Mazhalai%20Daycare%20and%20Teacher%20Training%20Academy%2CBest%20Daycare%20center%20and%20teacher%20training%20institute%20in%20pollachi&amp;shem=epsd1%2Cltae%2Crimspwouoe&amp;shndl=30&amp;source=sh%2Fx%2Floc%2Fosrp%2Fm1%2F2&amp;kgs=bcbc234e885a77c1"
+                        target="_blank" rel="noopener noreferrer" aria-label="Google Info"
+                        title="Google Business Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 9.61 16 7 16A8 8 0 1 1 7 0c2.19 0 4.036.8 5.443 2.125l-2.008 2.008C9.52 3.27 8.396 2.8 7 2.8a5.2 5.2 0 1 0 0 10.4c2.81 0 4.182-1.78 4.387-2.736H7V7.741h8.545z" />
                         </svg>
                     </a>
-                    <a href="https://www.instagram.com/mazhali_pollachi?utm_source=qr&amp;igsh=cGRneXUxZndscXNz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Follow on Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                    <a href="https://www.instagram.com/mazhali_pollachi?utm_source=qr&amp;igsh=cGRneXUxZndscXNz"
+                        target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Follow on Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
                         </svg>
                     </a>
                     <a href="#" aria-label="Facebook" title="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
                         </svg>
                     </a>
                 </div>
@@ -567,21 +1033,74 @@
         </div>
     </footer>
 
+    <!-- ============================================================
+         FLOATING ADMISSION ENQUIRY WIDGET
+    ============================================================ -->
+    <button class="admission-fab" id="admissionFabBtn" aria-expanded="false" aria-controls="admissionPanel">
+        <span class="admission-fab-icon" aria-hidden="true">📝</span>
+        <span class="admission-fab-text">Chat with us</span>
+    </button>
+
+    <div class="admission-panel" id="admissionPanel" aria-hidden="true">
+        <button class="admission-panel-close" id="admissionPanelClose"
+            aria-label="Close admission form">&times;</button>
+        <form class="admission-form" id="admissionForm" novalidate>
+            <h3 class="admission-form-title">Get Admission Details</h3>
+
+            <div class="admission-field">
+                <label class="admission-label" for="admName">Name</label>
+                <input class="admission-input" type="text" id="admName" name="name" placeholder="Your full name"
+                    required>
+            </div>
+
+            <div class="admission-field">
+                <label class="admission-label" for="admMobile">Mobile</label>
+                <input class="admission-input" type="tel" id="admMobile" name="mobile" placeholder="+91 00000 00000"
+                    required>
+            </div>
+
+            <div class="admission-field">
+                <label class="admission-label" for="admChildAge">Child Age</label>
+                <select class="admission-input" id="admChildAge" name="childAge" required>
+                    <option value="" disabled selected>Select child's age</option>
+                    <option value="Below 1.5 years">Below 1.5 years</option>
+                    <option value="1.5 – 2.5 years">1.5 – 2.5 years</option>
+                    <option value="2.5 – 3.5 years">2.5 – 3.5 years</option>
+                    <option value="3.5 – 4.5 years">3.5 – 4.5 years</option>
+                    <option value="4.5 – 5.5 years">4.5 – 5.5 years</option>
+                    <option value="Above 5.5 years">Above 5.5 years</option>
+                </select>
+            </div>
+
+            <div class="admission-field">
+                <label class="admission-label" for="admProgram">Program Interested</label>
+                <select class="admission-input" id="admProgram" name="program" required>
+                    <option value="" disabled selected>Select a program</option>
+                    <option value="Play Group (1.5 – 2.5 Years)">Play Group (1.5 – 2.5 Years)</option>
+                    <option value="Pre-KG (2.5 – 3.5 Years)">Pre-KG (2.5 – 3.5 Years)</option>
+                    <option value="LKG / UKG (3.5 – 5.5 Years)">LKG / UKG (3.5 – 5.5 Years)</option>
+                </select>
+            </div>
+
+            <p class="admission-status" id="admissionStatus" role="status" aria-live="polite"></p>
+
+            <button type="submit" class="admission-submit" id="admissionSubmitBtn">
+                <span>Schedule a Visit</span> <span aria-hidden="true">→</span>
+            </button>
+
+            <div class="admission-form-brand">
+                <img src="assets/logo.png" alt="Mazhalai Preschool" class="admission-form-logo">
+            </div>
+        </form>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/supabaseClient.js"></script>
+    <script src="js/admissionForm.js"></script>
+    <script src="js/enquireButtonFX.js"></script>
+    <script src="js/scrollAnimations.js"></script>
     <!-- supabaseClient.js initialises gallery filters + fetches all DB data on DOMContentLoaded -->
     <script>
-        // Scroll reveal animation
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.12 });
-        reveals.forEach(el => observer.observe(el));
-
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -591,6 +1110,17 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Scroll progress bar — fills 0→100% as the visitor reads down the page
+        const scrollProgressBar = document.getElementById('scrollProgressBar');
+        function updateScrollProgress() {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0;
+            scrollProgressBar.style.transform = `scaleX(${pct})`;
+        }
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        window.addEventListener('resize', updateScrollProgress);
+        updateScrollProgress();
 
         // Hamburger toggle
         const hamburger = document.getElementById('hamburger');
@@ -619,4 +1149,5 @@
         });
     </script>
 </body>
+
 </html>

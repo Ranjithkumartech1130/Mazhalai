@@ -1,0 +1,464 @@
+/* ============================================================
+   SCROLL FX — GSAP ScrollTrigger powered
+   Signature hero parallax shapes + the shared reveal-on-scroll
+   system driven by js/scrollAnimations.js. Colors reuse the site's
+   brand tokens (--primary-yellow / --primary-black) from styles.css
+   so this always stays visually in sync with the rest of the site.
+   ============================================================ */
+
+.hero-parallax {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hp-wrap {
+    position: absolute;
+    will-change: transform;
+}
+
+.hp-shape {
+    display: block;
+    animation: hpFloat 5s ease-in-out infinite;
+}
+
+.hp-circle { border-radius: 50%; }
+.hp-pill { border-radius: 999px; }
+
+.hp-yellow {
+    background: linear-gradient(155deg, var(--primary-yellow) 0%, var(--primary-yellow-dark) 100%);
+    box-shadow: 0 10px 26px rgba(255, 230, 0, 0.35);
+}
+
+.hp-yellow-soft {
+    background: radial-gradient(circle at 32% 28%, #fffbcc 0%, var(--primary-yellow) 70%, var(--primary-yellow-dark) 100%);
+    box-shadow: 0 10px 24px rgba(255, 230, 0, 0.3);
+}
+
+.hp-black {
+    background: var(--primary-black);
+    opacity: 0.88;
+}
+
+.hp-outline {
+    background: transparent;
+    border: 3px solid var(--primary-yellow);
+}
+
+.hp-star {
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--primary-yellow);
+    text-shadow: 0 0 14px rgba(255, 230, 0, 0.65);
+    animation: hpFloat 4.2s ease-in-out infinite, hpSpin 9s linear infinite;
+}
+
+/* -------- placement + sizing per shape (desktop) -------- */
+.hp1 { top: 10%;  left: 3%;   }
+.hp1 .hp-shape { width: 40px; height: 40px; }
+
+.hp2 { top: 6%;   left: 46%;  }
+.hp2 .hp-shape { width: 60px; height: 24px; }
+
+.hp3 { top: 34%;  left: 92%;  }
+.hp3 .hp-shape { width: 26px; height: 26px; }
+
+.hp4 { top: 68%;  left: 2%;   }
+.hp4 .hp-shape { width: 50px; height: 20px; }
+
+.hp5 { top: 78%;  left: 48%;  }
+.hp5 .hp-shape { width: 18px; height: 18px; }
+
+.hp6 { top: 16%;  left: 80%;  }
+
+@keyframes hpFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-16px) scale(1.05); }
+}
+
+@keyframes hpSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* -------- About section: paper-plane scroll trail -------- */
+.about {
+    position: relative;
+    overflow: hidden;
+}
+
+#about .container {
+    position: relative;
+    z-index: 1;
+}
+
+.plane-fx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.plane-fx-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.plane-trail-path {
+    fill: none;
+    stroke: rgba(17, 17, 17, 0.3);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+}
+
+.plane-icon {
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .plane-fx { display: none; }
+}
+
+/* -------- reveal stagger delay hook (set inline by JS) -------- */
+.reveal {
+    transition-delay: var(--reveal-delay, 0s);
+}
+
+/* -------- reveal direction/style modifiers — pair with .reveal -------- */
+.reveal.reveal-left {
+    transform: translate(-48px, 0);
+}
+.reveal.reveal-right {
+    transform: translate(48px, 0);
+}
+.reveal.reveal-pop {
+    transform: scale(0.86);
+}
+/* same `transform: none` reasoning as .reveal.active in styles.css */
+.reveal.reveal-left.active,
+.reveal.reveal-right.active,
+.reveal.reveal-pop.active {
+    transform: none;
+}
+
+@media (max-width: 900px) {
+    .hp3, .hp6 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hp-shape { animation: none !important; }
+    .hp-wrap { transform: none !important; }
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR — fixed top-of-page reading progress
+   ============================================================ */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-yellow-dark) 0%, var(--primary-yellow) 60%, #fff48a 100%);
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress-bar { transition: none !important; }
+}
+
+/* ============================================================
+   VISION & MISSION — parallax blobs + divider grow-in
+   ============================================================ */
+.vm-divider-line {
+    transform: scaleY(0);
+    transform-origin: center top;
+}
+
+@media (max-width: 900px) {
+    .vm-divider-line {
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vm-bg-shape { transform: none !important; }
+    .vm-divider-line { transform: none !important; }
+}
+
+/* -------- Vision/Mission divider — spinning, drifting, bobbing windmill --
+   Three independent transform layers (see the HTML comment above the
+   markup) so the motions never fight over the same `transform` property:
+     .vm-windmill-wrap  — scroll-linked vertical drift, set by GSAP
+     .vm-windmill-float — continuous up/down bob, this CSS keyframe
+     .vm-windmill       — scroll-linked rotation, set by GSAP
+   -------------------------------------------------------------------- */
+.vm-windmill-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    flex-shrink: 0;
+}
+
+.vm-windmill-float {
+    display: flex;
+    animation: vmWindmillBob 3.4s ease-in-out infinite;
+}
+
+@keyframes vmWindmillBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+}
+
+.vm-windmill {
+    width: 64px;
+    height: 64px;
+    display: block;
+    filter: drop-shadow(0 0 14px rgba(255, 230, 0, 0.45));
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@media (max-width: 900px) {
+    .vm-windmill {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vm-windmill { transform: none !important; }
+    /* .vm-windmill-float keeps bobbing even under reduce-motion — it's a
+       small decorative loop, not a scroll-triggered motion effect, so it's
+       exempted here on purpose. */
+}
+
+/* -------- Programs -> Academy — vertical scroll trail -----------------
+   A winding tube running from the top of Programs down to the "Why Train
+   With Mazhalai Academy" heading (#wormTrailEnd) — it deliberately stops
+   there instead of continuing through the marquee/CTA/Afterschool, which
+   is why .worm-vertical-fx has no `bottom` here: its height is measured
+   in JS (initWormTrail, scrollAnimations.js) off #wormTrailEnd's position
+   and set inline, rather than stretching to fill .worm-vertical-wrap
+   (which still spans all three sections for layout purposes).
+   Hugs the right edge of .container (max-width 1200px) rather than the
+   far edge of the browser window — `left` is computed from the
+   container's own right edge (50% + half its width) plus a fixed gap, so
+   the trail stays the same distance from the cards no matter how wide
+   the viewport gets.
+   Same stroke-dashoffset reveal as the About plane trail. The ball is a
+   plain HTML div, not an SVG shape — see the comment in index.html for
+   why, and for why it's split into a translate-only outer (#wormBall)
+   and a visual/pulse inner (.worm-ball-core).
+   Sized to fit comfortably beside .container at common desktop widths
+   (1440/1536/1920), not just very wide monitors — hidden below 1400px
+   where the gutter gets too tight.
+   -------------------------------------------------------------------- */
+.worm-vertical-wrap {
+    position: relative;
+}
+
+.worm-vertical-fx {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 614px);
+    width: 90px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.worm-vertical-svg {
+    display: block;
+    width: 90px;
+    height: 100%;
+    overflow: visible;
+}
+
+.worm-trail-path {
+    fill: none;
+    stroke: url(#wormTrailGrad);
+    stroke-width: 15;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.45));
+}
+
+.worm-ball {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    will-change: transform;
+}
+
+.worm-ball-core {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFFDE7 0%, #FFE600 55%, #B58900 100%);
+    filter: drop-shadow(0 0 18px rgba(255, 230, 0, 0.7));
+    animation: wormBallPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes wormBallPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 18px rgba(255, 230, 0, 0.7)); }
+    50%      { transform: scale(1.18); filter: drop-shadow(0 0 26px rgba(255, 230, 0, 0.9)); }
+}
+
+@media (max-width: 1400px) {
+    .worm-vertical-fx { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .worm-vertical-fx { display: none; }
+    .worm-ball-core { animation: none; }
+}
+
+/* -------- Academy "Why Train" — floating parallax shapes ---------------
+   Reuses the hero's .hp-wrap/.hp-shape building blocks (color/shape
+   modifiers) but with its own placement classes (av1-av5, sized for a
+   short heading+marquee strip instead of a full hero viewport) and its
+   own ScrollTrigger — see initAcademyValuesParallax() in
+   js/scrollAnimations.js. Unlike the hero, these shapes should ONLY move
+   in response to scroll, not idle on a timer — the hpFloat/hpSpin
+   keyframes that give the hero shapes their constant bob/spin are
+   cancelled here, leaving movement entirely to the JS-driven scrub on
+   .hp-wrap (a different element, so this doesn't touch that transform).
+   -------------------------------------------------------------------- */
+.academy-values-wrap {
+    position: relative;
+}
+
+.academy-values-fx {
+    position: absolute;
+    inset: -30px 0;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.academy-values-fx .hp-shape {
+    animation: none;
+}
+
+.academy-values-content {
+    position: relative;
+    z-index: 1;
+}
+
+.av1 { top: 2%;   left: 3%;  }
+.av1 .hp-shape { width: 32px; height: 32px; }
+
+.av2 { top: 62%;  left: 91%; }
+.av2 .hp-shape { width: 46px; height: 19px; }
+
+.av3 { top: 88%;  left: 7%;  }
+.av3 .hp-shape { width: 20px; height: 20px; }
+
+.av4 { top: 8%;   left: 84%; }
+.av4 .hp-shape { width: 38px; height: 16px; }
+
+.av5 { top: -8%;  left: 63%; }
+
+@media (max-width: 900px) {
+    .av2, .av4 { display: none; }
+}
+
+/* ============================================================
+   ACADEMY — infinite values marquee (two rows)
+   ============================================================ */
+.values-marquee-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.values-marquee {
+    overflow: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Swipe/drag layer — owns its own `x` offset (set by initMarqueeDrag() in
+   js/scrollAnimations.js), separate from .values-marquee-track's
+   scroll-driven `xPercent` so dragging never fights the pinned scroll
+   animation. touch-action: pan-y lets vertical page-scroll gestures pass
+   straight through on touch devices; only a clearly horizontal drag is
+   captured. */
+.values-marquee-drag {
+    display: flex;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.values-marquee-drag:active {
+    cursor: grabbing;
+}
+
+.values-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    will-change: transform;
+}
+
+.values-marquee .chip {
+    flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .values-marquee-track {
+        transform: none !important;
+        flex-wrap: wrap;
+        width: auto;
+        justify-content: center;
+    }
+    /* the aria-hidden set only exists to make the loop seamless */
+    .values-marquee-track [aria-hidden="true"] {
+        display: none;
+    }
+    .values-marquee {
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+}
+
+/* ============================================================
+   ADMISSIONS CTA — scroll-parallax doodles
+   (position lives on the wrap; the emoji keeps its float animation)
+   ============================================================ */
+.cta-doodle-wrap {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.cdw-1 { top: 20px; left: 8%; }
+.cdw-2 { top: 60%; left: 15%; }
+.cdw-3 { top: 15%; right: 10%; }
+
+.cdw-2 .cta-doodle { animation-delay: 1.2s; }
+.cdw-3 .cta-doodle { animation-delay: 0.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-doodle-wrap { transform: none !important; }
+}
+
+/* ============================================================
+   GALLERY — card pop-in (driven by ScrollAnimations MutationObserver)
+   ============================================================ */
+.gallery-card.gsap-revealed {
+    opacity: 1;
+}

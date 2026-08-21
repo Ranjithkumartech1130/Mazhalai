@@ -37,9 +37,12 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+/* No CSS `scroll-behavior: smooth` here on purpose — it makes scroll
+   position changes asynchronous, which fights GSAP ScrollTrigger's pinned
+   windmill (the Vision & Mission section) and reads as the page freezing
+   mid-scroll. Anchor-link smooth scrolling is already handled explicitly
+   in js/main.js via window.scrollTo({ behavior: 'smooth' }), which doesn't
+   have this conflict. */
 
 body {
     padding-top: var(--nav-height);
@@ -207,6 +210,10 @@ img {
     justify-content: center;
 }
 
+/* ==================== NEON LIQUID ENQUIRE BUTTON ====================
+   Full styling for .btn-enquire now lives in css/enquireButton.css
+   (linked in <head>), driven by js/enquireButtonFX.js. */
+
 /* ==================== NAVIGATION ==================== */
 .navbar {
     position: fixed;
@@ -228,11 +235,16 @@ img {
     height: 70px;
 }
 
+.navbar .container {
+    max-width: 1440px;
+}
+
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    gap: 20px;
 }
 
 /* Logo */
@@ -241,6 +253,7 @@ img {
     align-items: center;
     gap: 12px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .logo-img {
@@ -262,12 +275,33 @@ img {
 }
 
 .logo-name {
-    font-family: 'Sour Gummy', cursive;
+    font-family: var(--font-heading);
     font-size: 1.7rem;
     font-weight: 800;
     color: var(--primary-black);
     line-height: 1;
     letter-spacing: 0.5px;
+}
+
+.i-foot {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: baseline;
+}
+
+.i-foot::before {
+    content: '';
+    position: absolute;
+    top: -0.34em;
+    left: 0.08em;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 90'%3E%3Cellipse cx='24' cy='58' rx='19' ry='26'/%3E%3Ccircle cx='9' cy='16' r='8'/%3E%3Ccircle cx='24' cy='7' r='9'/%3E%3Ccircle cx='40' cy='6' r='8.5'/%3E%3Ccircle cx='54' cy='13' r='7'/%3E%3Ccircle cx='65' cy='24' r='5.5'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 90'%3E%3Cellipse cx='24' cy='58' rx='19' ry='26'/%3E%3Ccircle cx='9' cy='16' r='8'/%3E%3Ccircle cx='24' cy='7' r='9'/%3E%3Ccircle cx='40' cy='6' r='8.5'/%3E%3Ccircle cx='54' cy='13' r='7'/%3E%3Ccircle cx='65' cy='24' r='5.5'/%3E%3C/svg%3E") no-repeat center / contain;
+    transform: rotate(18deg);
+    pointer-events: none;
 }
 
 .logo-sub {
@@ -282,16 +316,18 @@ img {
 /* Nav links */
 .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 26px;
+    flex-shrink: 0;
 }
 
 .nav-links a {
     font-weight: 700;
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--primary-black);
     position: relative;
     padding: 4px 0;
+    white-space: nowrap;
     transition: color var(--transition);
 }
 
@@ -428,10 +464,17 @@ img {
     66% { transform: translate(-10px, 15px) scale(0.97); }
 }
 
+.hero .container {
+    /* Wider than the sitewide 1200px container — needed to fit three
+       columns (text, image, admission form) without cramming any of
+       them. Scoped to the hero only. */
+    max-width: 1360px;
+}
+
 .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1.15fr 0.8fr 1fr;
+    gap: 32px;
     align-items: center;
     position: relative;
     z-index: 1;
@@ -549,11 +592,34 @@ img {
 
 .hero-img {
     width: 100%;
-    max-width: 520px;
+    max-width: 320px;
     aspect-ratio: 4/3;
     object-fit: cover;
     display: block;
     filter: brightness(1.05) contrast(1.05) saturate(1.1);
+}
+
+/* Always-visible admission form card — sits in the hero's third column.
+   Reuses the same .admission-field/.admission-input/.admission-submit
+   classes as the floating widget (js/admissionForm.js) for a consistent
+   look; only the outer card here is new, and it's laid out in normal
+   flow (not position:fixed like .admission-panel) since it's part of
+   the page, not a toggleable overlay. */
+.hero-admission-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 24px 22px 20px;
+    align-self: start;
+}
+
+.hero-admission-card .admission-form-title {
+    font-size: 1.15rem;
+    padding-right: 0;
+}
+
+.hero-admission-card .admission-field {
+    margin-bottom: 12px;
 }
 
 /* Floating badges on hero image */
@@ -599,7 +665,10 @@ img {
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    /* `none`, not translateY(0)/scale(1) below — an identity transform still
+       establishes a new containing block for `position: fixed` descendants,
+       which breaks GSAP's pinned windmill in the Vision/Mission divider. */
+    transform: none;
 }
 
 /* ==================== ABOUT ==================== */
@@ -996,18 +1065,6 @@ img {
     min-height: 40px;
 }
 
-.vm-divider-emblem {
-    font-size: 1.5rem;
-    color: var(--primary-yellow);
-    animation: spinGlow 4s linear infinite;
-    text-shadow: 0 0 16px rgba(255,230,0,0.6);
-}
-
-@keyframes spinGlow {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-}
-
 /* Values strip */
 .vm-values-strip {
     display: flex;
@@ -1245,6 +1302,32 @@ img {
     margin: 0;
 }
 
+/* ==================== ACADEMY ==================== */
+.academy-subhead {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--primary-black);
+    margin: 50px 0 24px;
+    text-align: center;
+}
+
+.why-grid + .academy-subhead,
+.programs-grid + .academy-subhead {
+    margin-top: 60px;
+}
+
+.academy-values-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.academy-cta {
+    margin-top: 44px;
+}
+
 /* ==================== CTA / ADMISSIONS ==================== */
 .cta {
     padding: 0;
@@ -1258,16 +1341,12 @@ img {
 }
 
 .cta-doodle {
-    position: absolute;
+    display: block;
     font-size: 3.5rem;
+    line-height: 1;
     animation: floatBadge 4s ease-in-out infinite;
     opacity: 0.12;
-    pointer-events: none;
 }
-
-.cta-doodle-1 { top: 20px; left: 8%; animation-delay: 0s; }
-.cta-doodle-2 { top: 60%; left: 15%; animation-delay: 1.2s; }
-.cta-doodle-3 { top: 15%; right: 10%; animation-delay: 0.6s; }
 
 .cta-title {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -1602,6 +1681,7 @@ img {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .btn-admin-nav {
@@ -1672,8 +1752,10 @@ img {
         gap: 50px;
     }
 
-    .hero-image-wrapper {
-        order: -1;
+    .hero-admission-card {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
     }
 
     .footer-container {
@@ -2153,6 +2235,33 @@ img {
     height: 200px;
     overflow: hidden;
     background: var(--light-bg);
+    cursor: pointer;
+}
+
+.event-card-img-wrap::after {
+    content: '🔍';
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity var(--transition), transform var(--transition);
+    box-shadow: var(--shadow-yellow);
+    z-index: 2;
+}
+
+.event-card:hover .event-card-img-wrap::after {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .event-card-img-wrap img {
@@ -2275,5 +2384,210 @@ img {
 @media (max-width: 768px) {
     .events-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== FLOATING ADMISSION WIDGET ==================== */
+.admission-fab {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 1500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 16px 22px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-yellow);
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.admission-fab:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(255, 230, 0, 0.45);
+}
+
+.admission-fab-icon {
+    font-size: 1.15rem;
+}
+
+.admission-panel {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 1600;
+    width: min(360px, calc(100vw - 40px));
+    max-height: min(640px, calc(100vh - 56px));
+    overflow-y: auto;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 28px 24px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(24px) scale(0.97);
+    transform-origin: bottom right;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.admission-panel.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.admission-panel-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gray-light);
+    color: var(--primary-black);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition);
+}
+
+.admission-panel-close:hover {
+    background: var(--primary-yellow);
+}
+
+.admission-form-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary-black);
+    margin-bottom: 18px;
+    padding-right: 28px;
+}
+
+.admission-field {
+    margin-bottom: 14px;
+}
+
+.admission-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    margin-bottom: 6px;
+}
+
+.admission-input {
+    width: 100%;
+    background: var(--light-bg);
+    border: 1.5px solid var(--gray-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--primary-black);
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.admission-input::placeholder {
+    color: #9CA3AF;
+}
+
+.admission-input:focus {
+    outline: none;
+    border-color: var(--primary-yellow-dark);
+    background: var(--white);
+}
+
+.admission-textarea {
+    resize: vertical;
+    min-height: 44px;
+}
+
+.admission-status {
+    min-height: 18px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.admission-status.success { color: #15803D; }
+.admission-status.error { color: #B91C1C; }
+
+.admission-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 15px 20px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.92rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--shadow-yellow);
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.admission-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 230, 0, 0.4);
+}
+
+.admission-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.admission-form-brand {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.admission-form-logo {
+    height: 28px;
+    width: 28px;
+    object-fit: contain;
+    border-radius: 8px;
+    opacity: 0.75;
+}
+
+@media (max-width: 480px) {
+    .admission-fab {
+        right: 16px;
+        bottom: 16px;
+        padding: 14px 18px;
+    }
+
+    .admission-fab-text {
+        display: none;
+    }
+
+    .admission-panel {
+        right: 16px;
+        left: 16px;
+        bottom: 16px;
+        width: auto;
     }
 }

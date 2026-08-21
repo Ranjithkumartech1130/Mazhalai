@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS site_content (
   hero_title text DEFAULT 'Where Little Minds Blossom & Grow',
   hero_subtitle text DEFAULT 'Providing a safe, nurturing and joyful environment where children learn, explore and build confidence.',
   hero_image_url text,
+  about_image_url text,
   about_text text DEFAULT 'Mazhalai Preschool believes early childhood education creates the foundation for lifelong learning.',
   phone text DEFAULT '+91 95004 46103',
   email text DEFAULT 'info@mazhalaidaycare.com',
@@ -25,6 +26,14 @@ CREATE TABLE IF NOT EXISTS site_content (
 
 -- Insert initial row if empty
 INSERT INTO site_content (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
+
+-- Add missing columns if table already exists (safe migration)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='site_content' AND column_name='about_image_url') THEN
+    ALTER TABLE site_content ADD COLUMN about_image_url text;
+  END IF;
+END $$;
 
 -- Programs (Play Group, Pre-KG, etc.)
 CREATE TABLE IF NOT EXISTS programs (
@@ -116,6 +125,20 @@ CREATE TABLE IF NOT EXISTS events (
   created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- Add missing columns if table already exists (safe migration)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='events' AND column_name='cover_image_path') THEN
+    ALTER TABLE events ADD COLUMN cover_image_path text;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='events' AND column_name='category') THEN
+    ALTER TABLE events ADD COLUMN category text DEFAULT 'General';
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='events' AND column_name='created_by') THEN
+    ALTER TABLE events ADD COLUMN created_by uuid REFERENCES auth.users(id) ON DELETE SET NULL;
+  END IF;
+END $$;
+
 -- Testimonials
 CREATE TABLE IF NOT EXISTS testimonials (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -189,6 +212,16 @@ CREATE POLICY "Public Read" ON testimonials FOR SELECT USING (true);
 CREATE POLICY "Auth Insert" ON testimonials FOR INSERT WITH CHECK (auth.role() = 'authenticated');
 CREATE POLICY "Auth Update" ON testimonials FOR UPDATE USING (auth.role() = 'authenticated');
 CREATE POLICY "Auth Delete" ON testimonials FOR DELETE USING (auth.role() = 'authenticated');
+
+-- ==========================================
+-- 2b. Table Grants (required — RLS policies alone are not enough;
+--     Postgres blocks access at the GRANT level before RLS is evaluated)
+-- ==========================================
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon, authenticated;
+GRANT INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, UPDATE, DELETE ON TABLES TO authenticated;
 
 -- ==========================================
 -- 3. Storage Setup
