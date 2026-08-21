@@ -1768,6 +1768,18 @@ img {
         --nav-height: 70px;
     }
 
+    .section {
+        padding: 60px 0;
+    }
+
+    .about-hero-img {
+        height: 280px;
+    }
+
+    .btn-admin-nav {
+        display: none;
+    }
+
     .hamburger {
         display: flex;
     }
@@ -1859,6 +1871,14 @@ img {
 }
 
 @media (max-width: 480px) {
+    .section {
+        padding: 48px 0;
+    }
+
+    .about-hero-img {
+        height: 220px;
+    }
+
     .hero-title {
         font-size: 2rem;
     }
