@@ -2405,6 +2405,16 @@ img {
     .events-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Overrides the unconditional .btn-admin-nav block above (line ~2379),
+       which sets display:inline-flex and — being later in the cascade
+       than the nav's own @media(max-width:768px) block — was winning over
+       that block's display:none and leaving the Admin pill visible on
+       mobile. Repeating the override down here, after both unconditional
+       definitions, is what actually wins. */
+    .btn-admin-nav {
+        display: none;
+    }
 }
 
 /* ==================== FLOATING ADMISSION WIDGET ==================== */
