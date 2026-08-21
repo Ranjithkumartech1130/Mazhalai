@@ -1853,6 +1853,13 @@ img {
         grid-template-columns: 1fr;
     }
 
+    /* The floating admission FAB (position:fixed, bottom-right) otherwise
+       sits directly on top of the copyright line at the very end of the
+       page on mobile — this padding just gives the text room to clear it. */
+    .footer-bottom {
+        padding-bottom: 80px;
+    }
+
     .grand-opening-banner {
         font-size: 0.82rem;
         gap: 10px;
