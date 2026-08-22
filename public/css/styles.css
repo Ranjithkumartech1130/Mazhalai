@@ -569,6 +569,55 @@ img {
     background: var(--gray-border);
 }
 
+/* Hero social row — slides in under the stats card, one icon after
+   another; links out to Instagram/Facebook/mail so hover only needs
+   a color-invert (no transform) to avoid fighting the entrance animation. */
+.hero-social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.hero-social a {
+    width: 44px;
+    height: 44px;
+    background: var(--primary-black);
+    color: var(--primary-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transform: translateX(-28px);
+    animation: heroSocialSlide 0.55s ease forwards;
+    transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.hero-social a:nth-child(1) { animation-delay: 0.9s; }
+.hero-social a:nth-child(2) { animation-delay: 1.05s; }
+.hero-social a:nth-child(3) { animation-delay: 1.2s; }
+
+.hero-social a:hover {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    box-shadow: var(--shadow-yellow);
+}
+
+@keyframes heroSocialSlide {
+    from { opacity: 0; transform: translateX(-28px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-social a {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* Hero image */
 .hero-image-wrapper {
     position: relative;
@@ -1828,6 +1877,11 @@ img {
 
     .hero-stats {
         margin: 0 auto;
+    }
+
+    .hero-social {
+        justify-content: center;
+        margin: 24px auto 0;
     }
 
     .hero-img-frame {
