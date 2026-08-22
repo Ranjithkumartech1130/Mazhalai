@@ -44,6 +44,10 @@
    in js/main.js via window.scrollTo({ behavior: 'smooth' }), which doesn't
    have this conflict. */
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     padding-top: var(--nav-height);
     font-family: var(--font-body);
