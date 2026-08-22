@@ -149,6 +149,14 @@
     .hp3, .hp6 { display: none; }
 }
 
+/* Below this width the hero stacks into a single column and grows much
+   taller, so the desktop % based hp1/hp2/hp4/hp5 placements land on top
+   of the badge/heading/stats instead of drifting harmlessly in the
+   margins — just hide the whole decorative layer. */
+@media (max-width: 768px) {
+    .hero-parallax { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .hp-shape { animation: none !important; }
     .hp-wrap { transform: none !important; }
