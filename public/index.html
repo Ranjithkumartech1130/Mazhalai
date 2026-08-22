@@ -1149,14 +1149,6 @@
         window.addEventListener('resize', updateScrollProgress);
         updateScrollProgress();
 
-        // Hamburger toggle
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
         // Active nav link on scroll
         const sections = document.querySelectorAll('section, header');
         const navLinkItems = document.querySelectorAll('.nav-links a');
