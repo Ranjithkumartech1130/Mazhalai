@@ -2501,6 +2501,7 @@ img {
     font-size: 0.95rem;
     box-shadow: var(--shadow-yellow);
     cursor: pointer;
+    text-decoration: none;
     transition: transform var(--transition), box-shadow var(--transition);
 }
 

@@ -35,8 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fab.setAttribute('aria-expanded', String(open));
   }
 
+  // The floating "Chat with us" button is a plain link to WhatsApp
+  // (see index.html) — it no longer opens the admission form panel.
+  // The panel is still used by the "Enquire Now" / "Apply for Admission"
+  // links wired up below.
+
   if (fab && panel) {
-    fab.addEventListener('click', () => setPanelOpen(!panel.classList.contains('active')));
     if (closeBtn) closeBtn.addEventListener('click', () => setPanelOpen(false));
 
     document.addEventListener('keydown', (e) => {
