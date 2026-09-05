@@ -80,3 +80,19 @@ function getOrCreateSheet_() {
   return sheet;
 }
 
+// Test function: Run this once inside Apps Script Editor to grant permissions!
+function testSubmit() {
+  doPost({
+    postData: {
+      contents: JSON.stringify({
+        name: 'Test Parent',
+        mobile: '9876543210',
+        childAge: '3 Years',
+        program: 'Playgroup',
+        source: 'Apps Script Direct Test'
+      })
+    }
+  });
+}
+
+
