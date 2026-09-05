@@ -16,7 +16,7 @@
 //   4. Copy the deployment URL and paste it below.
 // ==========================================
 
-const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxxkab-u0S9HVwUIgik7xgAqG4QTKdodo4V2ltQdRFZlMjsCYLaFCuOMWft1UwRhuzp/exec';
+const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw8_vTaE41bReEvy9FlBdr6GhFs8cgHjsdpZ7-rJRLPpYMhHP0bXH12FylmFYg-hUv2lw/exec';
 
 const _admissionConfigured = (
   GOOGLE_SHEETS_WEB_APP_URL &&

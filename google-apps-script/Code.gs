@@ -19,20 +19,48 @@
  */
 
 var SHEET_NAME = 'Mazhalai_admission';
+var NOTIFICATION_EMAIL = 'vigneshdevaraj24@gmail.com';
 var HEADER_ROW = ['Timestamp', 'Name', 'Mobile', 'Child Age', 'Program Interested', 'Source'];
 
 function doPost(e) {
   var sheet = getOrCreateSheet_();
   var data = JSON.parse(e.postData.contents);
 
+  var timestamp = new Date();
+  var name = data.name || '';
+  var mobile = data.mobile || '';
+  var childAge = data.childAge || '';
+  var program = data.program || '';
+  var source = data.source || '';
+
+  // 1. Append row to Google Sheet
   sheet.appendRow([
-    new Date(),
-    data.name || '',
-    data.mobile || '',
-    data.childAge || '',
-    data.program || '',
-    data.source || '',
+    timestamp,
+    name,
+    mobile,
+    childAge,
+    program,
+    source
   ]);
+
+  // 2. Send email notification to vigneshdevaraj24@gmail.com
+  if (NOTIFICATION_EMAIL) {
+    try {
+      var subject = 'New Admission Enquiry: ' + name;
+      var body = 'You have received a new admission enquiry from the website:\n\n' +
+        '• Name: ' + name + '\n' +
+        '• Mobile: ' + mobile + '\n' +
+        '• Child Age: ' + childAge + '\n' +
+        '• Program Interested: ' + program + '\n' +
+        '• Form Source: ' + source + '\n' +
+        '• Time: ' + timestamp.toLocaleString() + '\n\n' +
+        'This record has also been added to your Google Sheet.';
+
+      MailApp.sendEmail(NOTIFICATION_EMAIL, subject, body);
+    } catch (err) {
+      Logger.log('Email sending error: ' + err.toString());
+    }
+  }
 
   return ContentService
     .createTextOutput(JSON.stringify({ result: 'success' }))
@@ -51,3 +79,4 @@ function getOrCreateSheet_() {
   }
   return sheet;
 }
+
