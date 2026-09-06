@@ -18,6 +18,12 @@
  * (created automatically on first submission if it doesn't exist).
  */
 
+// Run this function ONCE inside Apps Script Editor to trigger the Google Authorization popup!
+function authorizeWhatsApp() {
+  var response = UrlFetchApp.fetch('https://graph.facebook.com');
+  Logger.log('Authorization successful!');
+}
+
 var SHEET_NAME = 'Mazhalai_admission';
 var NOTIFICATION_EMAIL = 'vigneshdevaraj24@gmail.com';
 var HEADER_ROW = ['Timestamp', 'Name', 'Mobile', 'Child Age', 'Program Interested', 'Source'];
