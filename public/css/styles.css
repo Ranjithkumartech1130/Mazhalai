@@ -261,17 +261,17 @@ img {
 }
 
 .logo-img {
-    height: 54px;
-    width: 54px;
+    height: 60px;
+    width: 60px;
     object-fit: contain;
     border-radius: 12px;
     transition: transform var(--transition);
 }
 
 .logo-wordmark-img {
-    height: 38px;
+    height: 48px;
     width: auto;
-    max-width: 180px;
+    max-width: 220px;
     object-fit: contain;
     transition: transform var(--transition);
 }
