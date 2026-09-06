@@ -2514,6 +2514,12 @@ img {
     font-size: 1.15rem;
 }
 
+.admission-fab-icon-svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
 .admission-panel {
     position: fixed;
     right: 28px;
