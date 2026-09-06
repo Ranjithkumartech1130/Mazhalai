@@ -62,9 +62,55 @@ function doPost(e) {
     }
   }
 
+  // 3. Send WhatsApp Notification via Meta API
+  try {
+    sendWhatsAppNotification_(name, mobile, childAge, program, source, timestamp);
+  } catch (err) {
+    Logger.log('WhatsApp sending error: ' + err.toString());
+  }
+
   return ContentService
     .createTextOutput(JSON.stringify({ result: 'success' }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+var WHATSAPP_ACCESS_TOKEN = 'EAAYpvvtaPGMBSTcsrLrmSOv4VgfXLu6eZAcTHtSaydmcOqkoGbzyGghF6ZAShJnlyn3NGiM3FEJYrZCk0YR5k35MIAJPQswPNTofGLzYl3Ygz13lggTwSTzVbWdFCiAeetkr37gsheQZBgxIFD7YykzOg2cS86LKiBRQQj7XHJxyLhOqeo4uVzkGC0y7bAZDZD';
+var WHATSAPP_PHONE_NUMBER_ID = '1300506259812174';
+var WHATSAPP_RECIPIENT_NUMBER = '919940760957';
+
+function sendWhatsAppNotification_(name, mobile, childAge, program, source, timestamp) {
+  if (!WHATSAPP_ACCESS_TOKEN || !WHATSAPP_PHONE_NUMBER_ID || !WHATSAPP_RECIPIENT_NUMBER) return;
+
+  var message =
+    '📋 *New Admission Enquiry – Mazhalai*\n\n' +
+    '👤 *Name:* ' + name + '\n' +
+    '📞 *Mobile:* ' + mobile + '\n' +
+    '🎂 *Child Age:* ' + childAge + '\n' +
+    '📚 *Program:* ' + program + '\n' +
+    '🌐 *Source:* ' + (source || 'Website') + '\n' +
+    '🕐 *Time:* ' + timestamp.toLocaleString();
+
+  var url = 'https://graph.facebook.com/v19.0/' + WHATSAPP_PHONE_NUMBER_ID + '/messages';
+
+  var payload = {
+    messaging_product: 'whatsapp',
+    to: WHATSAPP_RECIPIENT_NUMBER,
+    type: 'text',
+    text: { body: message }
+  };
+
+  var options = {
+    method: 'post',
+    contentType: 'application/json',
+    headers: {
+      'Authorization': 'Bearer ' + WHATSAPP_ACCESS_TOKEN
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  var response = UrlFetchApp.fetch(url, options);
+  Logger.log('WhatsApp API Response: ' + response.getContentText());
 }
 
 function getOrCreateSheet_() {
