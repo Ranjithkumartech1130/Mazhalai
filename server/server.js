@@ -29,6 +29,9 @@ const {
   GOOGLE_PRIVATE_KEY,
   GOOGLE_SHEET_ID,
   GOOGLE_SHEET_TAB_NAME,
+  WHATSAPP_ACCESS_TOKEN,
+  WHATSAPP_PHONE_NUMBER_ID,
+  WHATSAPP_RECIPIENT_NUMBER,
 } = process.env;
 
 const SHEET_TAB = GOOGLE_SHEET_TAB_NAME || 'Mazhalai_admission';
@@ -36,6 +39,50 @@ const HEADER_ROW = ['Timestamp', 'Name', 'Mobile', 'Child Age', 'Program Interes
 
 function isConfigured() {
   return Boolean(GOOGLE_SERVICE_ACCOUNT_EMAIL && GOOGLE_PRIVATE_KEY && GOOGLE_SHEET_ID);
+}
+
+async function sendWhatsAppNotification({ name, mobile, childAge, program, source }) {
+  if (!WHATSAPP_ACCESS_TOKEN || !WHATSAPP_PHONE_NUMBER_ID || !WHATSAPP_RECIPIENT_NUMBER) {
+    console.warn('WhatsApp credentials not set — skipping notification.');
+    return;
+  }
+
+  const message =
+    `📋 *New Admission Enquiry – Mazhalai*\n\n` +
+    `👤 *Name:* ${name}\n` +
+    `📞 *Mobile:* ${mobile}\n` +
+    `🎂 *Child Age:* ${childAge}\n` +
+    `📚 *Program:* ${program}\n` +
+    `🌐 *Source:* ${source || 'Website'}\n` +
+    `🕐 *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+
+  const url = `https://graph.facebook.com/v19.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`;
+
+  const body = JSON.stringify({
+    messaging_product: 'whatsapp',
+    to: WHATSAPP_RECIPIENT_NUMBER,
+    type: 'text',
+    text: { body: message },
+  });
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+      },
+      body,
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      console.error('WhatsApp API error:', JSON.stringify(result));
+    } else {
+      console.log('✅ WhatsApp notification sent successfully.');
+    }
+  } catch (err) {
+    console.error('WhatsApp notification failed:', err.message);
+  }
 }
 
 function getSheetsClient() {
@@ -114,6 +161,9 @@ app.post('/api/admission', async (req, res) => {
         ]],
       },
     });
+
+    // Send WhatsApp notification to recipient
+    await sendWhatsAppNotification({ name, mobile, childAge, program, source });
 
     res.json({ result: 'success' });
   } catch (err) {
