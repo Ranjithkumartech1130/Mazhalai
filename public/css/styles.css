@@ -2516,15 +2516,15 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #25D366;
-    color: #ffffff;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
     border: none;
     border-radius: var(--radius-pill);
     padding: 16px 22px;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 0.95rem;
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    box-shadow: var(--shadow-yellow);
     cursor: pointer;
     text-decoration: none;
     transition: transform var(--transition), box-shadow var(--transition);
@@ -2532,7 +2532,7 @@ img {
 
 .admission-fab:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 12px 36px rgba(37, 211, 102, 0.55);
+    box-shadow: 0 12px 36px rgba(255, 230, 0, 0.45);
 }
 
 .admission-fab-icon {
@@ -2543,6 +2543,7 @@ img {
     width: 22px;
     height: 22px;
     flex-shrink: 0;
+    fill: #25D366;
 }
 
 .admission-panel {
