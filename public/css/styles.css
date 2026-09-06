@@ -2539,11 +2539,11 @@ img {
     font-size: 1.15rem;
 }
 
-.admission-fab-icon-svg {
-    width: 22px;
-    height: 22px;
+.admission-fab-icon-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
     flex-shrink: 0;
-    fill: #25D366;
 }
 
 .admission-panel {
