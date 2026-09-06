@@ -2542,7 +2542,8 @@ img {
 .admission-fab-icon-img {
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    border-radius: 50%;
+    object-fit: cover;
     flex-shrink: 0;
 }
 
