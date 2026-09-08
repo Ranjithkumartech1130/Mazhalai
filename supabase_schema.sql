@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS site_content (
   about_image_url text,
   about_text text DEFAULT 'Mazhalai Preschool believes early childhood education creates the foundation for lifelong learning.',
   phone text DEFAULT '+91 95004 46103',
-  email text DEFAULT 'info@mazhalaidaycare.com',
+  email text DEFAULT 'mazhalai26@gmail.com',
   address text DEFAULT '29, Om Shanthinagar, Opposite to Lathangi School, T.Kottampatty, Pollachi-02.',
   map_url text,
   facebook_url text,
