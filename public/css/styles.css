@@ -281,9 +281,9 @@ img {
 }
 
 .logo-full-img {
-    height: 52px;
+    height: 60px;
     width: auto;
-    max-width: 240px;
+    max-width: 260px;
     object-fit: contain;
     transition: transform var(--transition);
 }
@@ -1639,10 +1639,9 @@ img {
 
 .footer-logo-img {
     height: 56px;
-    width: 56px;
+    width: auto;
+    max-width: 200px;
     object-fit: contain;
-    border-radius: 12px;
-    border: 2px solid rgba(255,230,0,0.3);
 }
 
 .footer-name {
@@ -2712,11 +2711,11 @@ select.admission-input:focus {
 }
 
 .admission-form-logo {
-    height: 28px;
-    width: 28px;
+    height: 36px;
+    width: auto;
+    max-width: 140px;
     object-fit: contain;
-    border-radius: 8px;
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
 @media (max-width: 480px) {
