@@ -1638,9 +1638,9 @@ img {
 }
 
 .footer-logo-img {
-    height: 56px;
-    width: auto;
-    max-width: 200px;
+    height: auto;
+    width: 180px;
+    max-width: 220px;
     object-fit: contain;
 }
 
