@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS site_content (
   hero_subtitle text DEFAULT 'Providing a safe, nurturing and joyful environment where children learn, explore and build confidence.',
   hero_image_url text,
   about_image_url text,
-  about_text text DEFAULT 'Mazhalai Preschool believes early childhood education creates the foundation for lifelong learning.',
+  about_text text DEFAULT 'At Mazhalai, we provide safe, nurturing Daycare services alongside professional Teacher Training programs for early childhood educators.',
   phone text DEFAULT '+91 95004 46103',
   email text DEFAULT 'mazhalai26@gmail.com',
   address text DEFAULT '29, Om Shanthinagar, Opposite to Lathangi School, T.Kottampatty, Pollachi-02.',
