@@ -330,7 +330,61 @@ async function fetchPrograms() {
 }
 
 // ──────────────────────────────────────────────────────────────
-// 6. STATIC FALLBACK GALLERY HTML
+// 6. FETCH TESTIMONIALS (parent reviews, managed from Admin Portal)
+// ──────────────────────────────────────────────────────────────
+// There's no paid Google Places API key wired up, so reviews aren't
+// pulled in live from Google — an admin copies them over manually from
+// https://g.page/r/CVHVz5U0aXOgEAE/review into the Testimonials tab of
+// the Admin Portal, and they land here via the `testimonials` table.
+function buildTestimonialCard(t, hidden) {
+  const rating = Math.min(5, Math.max(1, t.rating || 5));
+  const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  const initial = (t.parent_name || '?').trim().charAt(0).toUpperCase();
+  const hiddenAttr = hidden ? ' aria-hidden="true"' : '';
+
+  return `
+    <div class="testimonial-card"${hiddenAttr}>
+      <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+      <div class="testimonial-stars" aria-hidden="true">${stars}</div>
+      <p class="testimonial-text">${t.review}</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">${initial}</div>
+        <div class="testimonial-who">
+          <div class="testimonial-name">${t.parent_name}</div>
+          <div class="testimonial-source">Google Review</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function fetchTestimonials() {
+  if (!_configured) return;
+
+  const track = document.getElementById('testimonialsTrack');
+  if (!track) return;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('testimonials')
+      .select('parent_name, review, rating, is_featured, created_at')
+      .eq('is_featured', true)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    if (!data || data.length === 0) return; // keep the static placeholder cards
+
+    // Render the set twice back-to-back so the CSS marquee (which slides
+    // exactly -50%) loops seamlessly regardless of how many rows exist.
+    const visibleCards = data.map((t) => buildTestimonialCard(t, false)).join('');
+    const hiddenCopy = data.map((t) => buildTestimonialCard(t, true)).join('');
+    track.innerHTML = visibleCards + hiddenCopy;
+  } catch (err) {
+    console.error('Testimonials fetch error:', err.message);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// 7. STATIC FALLBACK GALLERY HTML
 //    Shown when Supabase is unconfigured or returns empty data
 // ──────────────────────────────────────────────────────────────
 function getStaticGalleryHTML() {
@@ -437,4 +491,5 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchPrograms();
   fetchGallery();
   fetchEvents();
+  fetchTestimonials();
 });

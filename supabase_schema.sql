@@ -139,13 +139,32 @@ BEGIN
   END IF;
 END $$;
 
--- Testimonials
+-- Testimonials (managed manually via the Admin panel since Google's Places
+-- API requires a billed API key we don't have — the admin copies reviews
+-- over from the business's own review page instead of an automated feed)
 CREATE TABLE IF NOT EXISTS testimonials (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   parent_name text NOT NULL,
   review text NOT NULL,
-  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+  rating integer NOT NULL DEFAULT 5,
+  is_featured boolean NOT NULL DEFAULT true,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT testimonials_rating_range CHECK (rating BETWEEN 1 AND 5)
 );
+
+-- Add missing columns if table already exists (safe migration)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='testimonials' AND column_name='rating') THEN
+    ALTER TABLE testimonials ADD COLUMN rating integer NOT NULL DEFAULT 5;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='testimonials' AND column_name='is_featured') THEN
+    ALTER TABLE testimonials ADD COLUMN is_featured boolean NOT NULL DEFAULT true;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints WHERE table_name='testimonials' AND constraint_name='testimonials_rating_range') THEN
+    ALTER TABLE testimonials ADD CONSTRAINT testimonials_rating_range CHECK (rating BETWEEN 1 AND 5);
+  END IF;
+END $$;
 
 -- ==========================================
 -- 2. Configure Row Level Security (RLS)

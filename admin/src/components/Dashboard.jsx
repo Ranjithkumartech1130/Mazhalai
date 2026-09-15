@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { supabase } from '../supabase'
-import { LayoutDashboard, LogOut, Settings, Image as ImageIcon, Calendar, BookOpen, ExternalLink } from 'lucide-react'
+import { LayoutDashboard, LogOut, Settings, Image as ImageIcon, Calendar, BookOpen, Quote, ExternalLink } from 'lucide-react'
 import SiteContentForm from './SiteContentForm'
 import GalleryManager from './GalleryManager'
 import EventManager from './EventManager'
 import ProgramsManager from './ProgramsManager'
+import TestimonialsManager from './TestimonialsManager'
 
 export default function Dashboard({ session }) {
   const [activeTab, setActiveTab] = useState('gallery')
@@ -19,10 +20,11 @@ export default function Dashboard({ session }) {
   }
 
   const navItems = [
-    { id: 'gallery',  label: 'Gallery',        icon: ImageIcon },
-    { id: 'events',   label: 'Events',          icon: Calendar },
-    { id: 'settings', label: 'Site Settings',   icon: Settings },
-    { id: 'programs', label: 'Programs',        icon: BookOpen },
+    { id: 'gallery',      label: 'Gallery',        icon: ImageIcon },
+    { id: 'events',       label: 'Events',          icon: Calendar },
+    { id: 'settings',     label: 'Site Settings',   icon: Settings },
+    { id: 'programs',     label: 'Programs',        icon: BookOpen },
+    { id: 'testimonials', label: 'Testimonials',    icon: Quote },
   ]
 
   const renderContent = () => {
@@ -32,6 +34,8 @@ export default function Dashboard({ session }) {
       case 'settings': return <SiteContentForm />
       case 'programs':
         return <ProgramsManager />
+      case 'testimonials':
+        return <TestimonialsManager />
       default:
         return <GalleryManager />
     }

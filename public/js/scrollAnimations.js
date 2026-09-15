@@ -309,7 +309,7 @@
   }
 
   function initDynamicGridReveals() {
-    ['galleryGrid', 'programsGrid', 'eventsGrid'].forEach((id) => {
+    ['galleryGrid', 'programsGrid', 'eventsGrid', 'testimonialsTrack'].forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       // Mark whatever is already here (handled by the batch/IO above) so

@@ -1209,6 +1209,170 @@ img {
     }
 }
 
+/* ==================== TESTIMONIALS ==================== */
+.testimonials {
+    background: var(--white);
+    overflow: hidden;
+}
+
+.testimonials-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 10px 22px;
+    background: var(--light-bg);
+    border: 1.5px solid var(--gray-border);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-sm);
+}
+
+.testimonials-google-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.testimonials-stars {
+    color: var(--primary-yellow-dark);
+    letter-spacing: 2px;
+    font-size: 0.95rem;
+}
+
+.testimonials-rating-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary-black);
+}
+
+/* Marquee: the track holds the card set twice back-to-back (see HTML),
+   and the keyframe below only ever slides it by exactly half its width —
+   so the moment the first copy scrolls fully out of view, the second
+   copy is sitting in the exact start position and the loop looks
+   continuous instead of snapping/jumping. */
+.testimonials-marquee-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 48px 0 12px;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.testimonials-track {
+    display: flex;
+    width: max-content;
+    gap: 26px;
+    padding: 0 26px;
+    animation: testimonialsScroll 46s linear infinite;
+}
+
+.testimonials-marquee-wrap:hover .testimonials-track,
+.testimonials-marquee-wrap:focus-within .testimonials-track {
+    animation-play-state: paused;
+}
+
+@keyframes testimonialsScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.testimonial-card {
+    flex: 0 0 340px;
+    background: var(--light-bg);
+    border: 1.5px solid var(--gray-border);
+    border-radius: var(--radius-md);
+    padding: 32px 28px 26px;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-yellow);
+}
+
+.testimonial-quote-mark {
+    position: absolute;
+    top: 6px;
+    right: 22px;
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--primary-yellow);
+    opacity: 0.7;
+}
+
+.testimonial-stars {
+    color: var(--primary-yellow-dark);
+    letter-spacing: 2px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.testimonial-text {
+    font-size: 0.95rem;
+    color: var(--gray-text);
+    line-height: 1.7;
+    min-height: 96px;
+}
+
+.testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-border);
+}
+
+.testimonial-avatar {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--primary-black);
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+}
+
+.testimonial-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary-black);
+}
+
+.testimonial-source {
+    font-size: 0.78rem;
+    color: var(--gray-text);
+}
+
+.testimonials-cta {
+    margin-top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonials-track {
+        animation: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .testimonial-card {
+        flex-basis: 280px;
+        padding: 26px 22px 22px;
+    }
+}
+
 /* ==================== PROGRAMS ==================== */
 .programs {
     background: var(--light-bg);

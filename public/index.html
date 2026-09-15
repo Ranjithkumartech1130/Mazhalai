@@ -448,6 +448,190 @@
     </section>
 
     <!-- ============================================================
+         TESTIMONIALS SECTION
+         Reviews are added/edited manually from the Admin Portal
+         (Testimonials tab) — there's no paid Google Places API key
+         wired up, so an admin copies parent reviews over from the
+         business's own Google review page:
+         https://g.page/r/CVHVz5U0aXOgEAE/review
+         The cards below are static placeholders shown until Supabase
+         has real rows; fetchTestimonials() in js/supabaseClient.js
+         replaces #testimonialsTrack's contents once data loads (and
+         duplicates the set so the marquee loop stays seamless).
+    ============================================================ -->
+    <section id="testimonials" class="testimonials section">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-label reveal">Parent Voices</div>
+                <h2 class="section-title reveal">What <span class="highlight">Parents</span> Say</h2>
+                <p class="reveal">Real words from real Mazhalai families, shared straight from our Google Business
+                    reviews.</p>
+                <div class="testimonials-rating-badge reveal">
+                    <svg class="testimonials-google-icon" viewBox="0 0 48 48" aria-hidden="true">
+                        <path fill="#FFC107"
+                            d="M43.6 20.5H42V20.4H24v7.2h11.3c-1.6 4.6-6 7.9-11.3 7.9-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.2 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20.1-7.6 20.1-21 0-1.2-.1-2.4-.5-3.5z" />
+                        <path fill="#FF3D00"
+                            d="M6.3 14.7l6.6 4.8C14.6 15.6 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.2 29.5 3 24 3 16.3 3 9.6 7.3 6.3 14.7z" />
+                        <path fill="#4CAF50"
+                            d="M24 45c5.4 0 10.3-2.1 14-5.4l-6.5-5.5C29.6 35.6 26.9 36.5 24 36.5c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5c3.3 6.5 10 11.4 17.8 11.4z" />
+                        <path fill="#1976D2"
+                            d="M43.6 20.5H42V20.4H24v7.2h11.3c-.8 2.2-2.2 4.1-4 5.4l6.5 5.5C41.5 35.3 45 30.1 45 24c0-1.2-.1-2.4-.4-3.5z" />
+                    </svg>
+                    <span class="testimonials-stars" aria-hidden="true">★★★★★</span>
+                    <span class="testimonials-rating-text">Loved by parents on Google</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-marquee-wrap reveal">
+            <div class="testimonials-track" id="testimonialsTrack">
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">The teachers genuinely care for every child. My daughter runs into
+                        class every morning with a smile — that says it all about the environment Mazhalai has
+                        built.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">P</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Priya S.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">Clean, safe, and full of joyful learning. The staff update us
+                        regularly on our son's progress and always go the extra mile to make him comfortable.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">D</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Deepa M.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">We looked at several preschools in Pollachi before choosing Mazhalai
+                        — best decision we made. The teacher training programs also speak to how seriously they
+                        take early education.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">R</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Ramesh K.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">From the admission process to daily pickup, everything feels
+                        organized and warm. My twins have grown so much in confidence since joining.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Suja V.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">A perfect blend of care and curriculum. The activities are thoughtful
+                        and age-appropriate, and the staff treats every child like their own.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">K</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Karthik N.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate set (aria-hidden) so the CSS marquee loops seamlessly -->
+                <div class="testimonial-card" aria-hidden="true">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">The teachers genuinely care for every child. My daughter runs into
+                        class every morning with a smile — that says it all about the environment Mazhalai has
+                        built.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">P</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Priya S.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">Clean, safe, and full of joyful learning. The staff update us
+                        regularly on our son's progress and always go the extra mile to make him comfortable.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">D</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Deepa M.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">We looked at several preschools in Pollachi before choosing Mazhalai
+                        — best decision we made. The teacher training programs also speak to how seriously they
+                        take early education.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">R</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Ramesh K.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">From the admission process to daily pickup, everything feels
+                        organized and warm. My twins have grown so much in confidence since joining.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Suja V.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+                    <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
+                    <p class="testimonial-text">A perfect blend of care and curriculum. The activities are thoughtful
+                        and age-appropriate, and the staff treats every child like their own.</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">K</div>
+                        <div class="testimonial-who">
+                            <div class="testimonial-name">Karthik N.</div>
+                            <div class="testimonial-source">Google Review</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center">
+            <a href="https://g.page/r/CVHVz5U0aXOgEAE/review" target="_blank" rel="noopener"
+                class="btn btn-outline testimonials-cta reveal">
+                ⭐ Read &amp; Write a Review on Google
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
          PROGRAMS -> ACADEMY -> AFTERSCHOOL SCROLL TRAIL
          A vertical winding tube pinned in the right-hand gutter (outside
          .container, so it never overlaps card content), running the full
@@ -1031,6 +1215,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#vision-mission">Vision & Mission</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#programs">Programs</a></li>
                     <li><a href="#academy">Academy</a></li>
                     <li><a href="#afterschool">Afterschool</a></li>
