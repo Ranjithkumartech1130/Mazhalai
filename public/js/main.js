@@ -204,5 +204,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowRight') showNextPhoto();
         if (e.key === 'ArrowLeft') showPrevPhoto();
     });
+
+    // Some browser extensions (form-fill / autofill helpers) inject an inline
+    // style onto the "Program Interested" <select> that tiles an icon across
+    // its background. Strip any inline style they add so our own CSS renders.
+    ['heroAdmProgram', 'admProgram'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const stripInjectedStyle = () => {
+            if (el.getAttribute('style')) el.removeAttribute('style');
+        };
+        new MutationObserver(stripInjectedStyle).observe(el, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+        el.addEventListener('focus', stripInjectedStyle);
+        el.addEventListener('click', stripInjectedStyle);
+    });
 });
 
