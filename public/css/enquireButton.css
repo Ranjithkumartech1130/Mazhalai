@@ -164,9 +164,8 @@
     font-size: 1.02rem;
     font-family: var(--font-heading, inherit);
     text-transform: none;
-    color: var(--eq-yellow);
-    text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6);
-    animation: eqTextFlip var(--eq-cycle) ease-in-out infinite;
+    color: var(--eq-black);
+    text-shadow: none;
     pointer-events: none;
     white-space: nowrap;
 }
@@ -271,15 +270,6 @@
     100% { opacity: 0; }
 }
 
-@keyframes eqTextFlip {
-    0%   { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
-    44%  { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
-    52%  { color: #141200; text-shadow: none; }
-    76%  { color: #141200; text-shadow: none; }
-    88%  { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
-    100% { color: var(--eq-yellow); text-shadow: 0 0 6px rgba(255,230,0,0.9), 0 0 18px rgba(255,230,0,0.6); }
-}
-
 @keyframes eqArrowNudge {
     0%, 44%  { transform: translateX(0); }
     50%, 76% { transform: translateX(3px); }
@@ -321,7 +311,6 @@
     .btn-enquire .eq-liquid-fill::after,
     .btn-enquire .eq-liquid-head::after,
     .btn-enquire .eq-gloss,
-    .btn-enquire .eq-label,
     .btn-enquire .eq-arrow-line,
     .btn-enquire .eq-arrow-head {
         animation: none !important;
@@ -329,7 +318,6 @@
     }
     .btn-enquire .eq-outline { opacity: 1; }
     .btn-enquire .eq-liquid-fill { width: 100%; }
-    .btn-enquire .eq-label { color: var(--eq-black); }
 }
 
 @media (max-width: 560px) {
