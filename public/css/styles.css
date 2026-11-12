@@ -2905,3 +2905,139 @@ select.admission-input:focus {
         width: auto;
     }
 }
+
+/* ==================== PRESCHOOL BRAND + ADMISSIONS 2027–2028 ==================== */
+.hero-brand {
+    margin-bottom: 16px;
+}
+
+.hero-brand .pill-badge {
+    margin-bottom: 12px;
+}
+
+.hero-brand-name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    color: var(--primary-black);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.hero-brand-trust {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--gray-text);
+    margin: 4px 0 0;
+}
+
+.admissions-ribbon {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    background: var(--primary-black);
+    color: var(--white);
+    padding: 8px 10px 8px 8px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 22px;
+    text-decoration: none;
+    box-shadow: var(--shadow-yellow);
+    transition: transform var(--transition), box-shadow var(--transition);
+    animation: admissionsRibbonPulse 2.4s ease-in-out infinite;
+}
+
+.admissions-ribbon:hover {
+    transform: translateY(-2px);
+}
+
+.admissions-ribbon-tag {
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+}
+
+.admissions-ribbon-year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--primary-yellow);
+    letter-spacing: 0.5px;
+}
+
+.admissions-ribbon-phone {
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding-right: 8px;
+    white-space: nowrap;
+}
+
+@keyframes admissionsRibbonPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 230, 0, 0.55); }
+    50% { box-shadow: 0 0 0 10px rgba(255, 230, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admissions-ribbon { animation: none; }
+}
+
+.admission-form-title + .admission-form-sub {
+    margin-top: -12px;
+}
+
+.admission-form-sub {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray-text);
+    margin-bottom: 16px;
+}
+
+.admission-form-sub a {
+    color: var(--primary-black);
+    text-decoration: underline;
+}
+
+.cta-classes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: -12px auto 22px;
+}
+
+.cta-phone {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 28px;
+}
+
+.cta-phone a {
+    color: var(--primary-yellow);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cta-phone a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .admissions-ribbon {
+        max-width: 100%;
+        justify-content: center;
+        border-radius: var(--radius-md);
+        padding: 8px 12px;
+    }
+    .hero-brand-trust {
+        font-size: 0.82rem;
+    }
+    .admission-form-sub {
+        font-size: 0.8rem;
+    }
+}
