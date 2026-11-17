@@ -3041,3 +3041,8 @@ select.admission-input:focus {
         font-size: 0.8rem;
     }
 }
+
+/* Preschool programs: four cards (Playgroup, Pre-KG, LKG, UKG) fit in one row on desktop */
+#programsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
